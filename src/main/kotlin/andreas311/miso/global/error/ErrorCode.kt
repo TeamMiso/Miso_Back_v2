@@ -18,6 +18,7 @@ enum class ErrorCode(
     // TOKEN
     TOKEN_IS_EXPIRED(401, "토큰이 만료 되었습니다."),
     TOKEN_NOT_VALID(401, "토큰이 유효 하지 않습니다."),
+    TOKEN_TYPE_NOT_VALID(401, "토큰 타입이 유효하지 않습니다"),
 
     // USER
     EMAIL_KEY_IS_INVALID(401, "이메일 인증번호가 일치하지 않습니다."),
