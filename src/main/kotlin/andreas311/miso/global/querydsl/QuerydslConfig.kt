@@ -1,4 +1,4 @@
-package andreas311.miso.global.config
+package andreas311.miso.global.querydsl
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.context.annotation.Bean
