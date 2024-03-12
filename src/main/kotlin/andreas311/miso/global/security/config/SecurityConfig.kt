@@ -1,5 +1,6 @@
 package andreas311.miso.global.security.config
 
+import andreas311.miso.global.logger.filter.LogRequestFilter
 import andreas311.miso.global.security.filter.JwtExceptionFilter
 import andreas311.miso.global.security.filter.JwtRequestFilter
 import andreas311.miso.global.security.handler.CustomAccessDeniedHandler
@@ -21,7 +22,8 @@ import org.springframework.web.cors.CorsUtils
 @EnableWebSecurity
 class SecurityConfig(
     private val jwtRequestFilter: JwtRequestFilter,
-    private val jwtExceptionFilter: JwtExceptionFilter
+    private val jwtExceptionFilter: JwtExceptionFilter,
+    private val logRequestFilter: LogRequestFilter
 ) {
     @Bean
     fun filterChain(http: HttpSecurity) : SecurityFilterChain {
@@ -81,9 +83,7 @@ class SecurityConfig(
             .and()
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(jwtExceptionFilter, JwtRequestFilter::class.java)
-
-            // 추가 예정
-//            .addFilterBefore(logRequestFilter, JwtExceptionFilter::class.java)
+            .addFilterBefore(logRequestFilter, JwtExceptionFilter::class.java)
 
             .build()
     }
