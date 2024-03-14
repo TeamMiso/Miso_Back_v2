@@ -4,13 +4,20 @@ import andreas311.miso.domain.email.adapter.output.persistence.mapper.EmailMappe
 import andreas311.miso.domain.email.adapter.output.persistence.repository.EmailRepository
 import andreas311.miso.domain.email.application.port.output.CommandEmailPort
 import andreas311.miso.domain.email.domain.Email
+import org.springframework.stereotype.Component
 
+@Component
 class CommandEmailPersistenceAdapter(
-    private val emailRepository: EmailRepository,
-    private val emailMapper: EmailMapper
+    private val emailMapper: EmailMapper,
+    private val emailRepository: EmailRepository
 ): CommandEmailPort {
     override fun saveEmail(email: Email): Email {
-        val email = emailRepository.save(emailMapper.toEntity(email))
-        return emailMapper.toDomain(email)!!
+        val emailEntity = emailRepository.save(emailMapper.toEntity(email))
+        return emailMapper.toDomain(emailEntity)!!
+    }
+
+    override fun deleteByEmail(email: String) {
+        val emailEntity = emailRepository.findByEmail(email)
+        return emailRepository.delete(emailEntity)
     }
 }
