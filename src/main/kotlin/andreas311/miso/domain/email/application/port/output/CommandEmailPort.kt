@@ -4,4 +4,6 @@ import andreas311.miso.domain.email.domain.Email
 
 interface CommandEmailPort {
     fun saveEmail(email: Email): Email
+
+    fun deleteByEmail(email: String)
 }
