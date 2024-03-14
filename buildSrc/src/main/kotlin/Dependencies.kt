@@ -34,4 +34,8 @@ object Dependencies {
 
     // fcm
     const val FCM = "com.google.firebase:firebase-admin:${DependencyVersions.FCM_VERSION}"
+
+    // mapper
+    const val MAPPER = "org.mapstruct:mapstruct:${DependencyVersions.MAPPER_VERSION}.Final"
+    const val MAPPER_APT = "org.mapstruct:mapstruct-processor:${DependencyVersions.MAPPER_VERSION}.Final"
 }
