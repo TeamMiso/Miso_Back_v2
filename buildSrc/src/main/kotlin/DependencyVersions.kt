@@ -20,4 +20,7 @@ object DependencyVersions {
 
     // fcm
     const val FCM_VERSION = "9.1.1"
+
+    // mapper
+    const val MAPPER_VERSION = "1.5.2"
 }
