@@ -67,6 +67,10 @@ dependencies {
 
 	// fcm
 	implementation(Dependencies.FCM)
+
+	// mapper
+	implementation(Dependencies.MAPPER)
+	kapt(Dependencies.MAPPER_APT)
 }
 
 tasks.withType<KotlinCompile> {
