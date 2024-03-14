@@ -12,7 +12,7 @@ class UserEntity(
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    var id: UUID,
+    val id: UUID,
 
     @Column(name = "email", nullable = false)
     val email: String,
