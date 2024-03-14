@@ -3,7 +3,7 @@ package andreas311.miso.domain.user.domain
 import java.util.*
 
 data class User(
-    var id: UUID,
+    val id: UUID,
     val email: String,
     val password: String,
     var point: Int,

@@ -6,6 +6,15 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserMapper {
+    fun toEntity(domain: User): UserEntity =
+        UserEntity(
+            id = domain.id,
+            email = domain.email,
+            password = domain.password,
+            point = domain.point,
+            role = domain.role
+        )
+
     fun toDomain(entity: UserEntity?): User? =
         entity?.let {
             User(

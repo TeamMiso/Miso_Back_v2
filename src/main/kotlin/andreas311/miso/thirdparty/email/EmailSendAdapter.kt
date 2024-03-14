@@ -6,9 +6,11 @@ import andreas311.miso.domain.email.application.port.output.EmailSendPort
 import andreas311.miso.domain.email.domain.Email
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
+import org.springframework.stereotype.Component
 import java.util.*
 import javax.mail.MessagingException
 
+@Component
 class EmailSendAdapter(
     private val javaMailSender: JavaMailSender,
     private val commandEmailPort: CommandEmailPort
