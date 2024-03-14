@@ -15,4 +15,7 @@ class QueryUserPersistenceAdapter(
         val userEntity = userRepository.findByEmail(email)
         return userMapper.toDomain(userEntity)
     }
+
+    override fun existsByEmail(email: String): Boolean =
+        userRepository.existsByEmail(email)
 }
