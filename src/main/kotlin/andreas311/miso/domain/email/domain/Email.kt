@@ -6,7 +6,8 @@ data class Email(
     var randomKey: String,
     var authentication: Boolean
 ) {
-    fun updateAuthentication(authentication: Boolean) {
+    fun updateAuthentication(authentication: Boolean): Email {
         this.authentication = authentication
+        return this
     }
 }
