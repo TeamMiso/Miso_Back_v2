@@ -1,11 +1,12 @@
 package andreas311.miso.domain.email.adapter.output.persistence.entity
 
-import andreas311.miso.common.entitiy.BaseIdxEntity
 import javax.persistence.*
 
 @Entity
 @Table(name = "email")
 class EmailEntity(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "email_id", nullable = false)
     val id: Long,
 
@@ -17,4 +18,4 @@ class EmailEntity(
 
     @Column(name = "authentication", nullable = false)
     var authentication: Boolean
-): BaseIdxEntity(id)
+)
