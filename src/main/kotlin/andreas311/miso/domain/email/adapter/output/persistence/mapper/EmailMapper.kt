@@ -14,7 +14,7 @@ class EmailMapper {
             authentication = domain.authentication
         )
 
-    fun toDomain(entity: EmailEntity): Email? =
+    fun toDomain(entity: EmailEntity?): Email? =
         entity?.let {
             Email(
                 id = entity.id,

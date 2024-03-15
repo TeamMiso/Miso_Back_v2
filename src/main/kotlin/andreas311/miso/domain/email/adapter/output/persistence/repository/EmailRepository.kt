@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository
 interface EmailRepository: CrudRepository<EmailEntity, Long> {
     fun findByEmail(email: String): EmailEntity
     fun existsByEmail(email: String): Boolean
+    fun findByRandomKey(randomKey: String): EmailEntity?
 }

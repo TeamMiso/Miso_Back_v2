@@ -18,4 +18,9 @@ class QueryEmailPersistenceAdapter(
 
     override fun existsByEmail(email: String): Boolean =
         emailRepository.existsByEmail(email)
+
+    override fun findByRandomKeyOrNull(randomKey: String): Email? {
+        val emailEntity = emailRepository.findByRandomKey(randomKey)
+        return emailMapper.toDomain(emailEntity)
+    }
 }
