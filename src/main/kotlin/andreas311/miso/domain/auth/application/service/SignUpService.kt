@@ -24,7 +24,6 @@ class SignUpService(
     private val passwordEncodePort: PasswordEncodePort
 ) : SignUpUseCase {
     override fun execute(signUpDto: SignUpDto) {
-
         passwordEncodePort.isPasswordMatch(signUpDto.password, signUpDto.passwordCheck)
 
         if (!queryUserPort.existsByEmail(signUpDto.email)) {
