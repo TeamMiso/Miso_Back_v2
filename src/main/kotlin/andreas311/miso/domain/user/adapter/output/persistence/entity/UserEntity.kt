@@ -24,7 +24,5 @@ class UserEntity(
     var point: Int = 0,
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "Role", joinColumns = [JoinColumn(name = "user_id")])
-    val role: MutableList<Role>
+    val role: Role
 )

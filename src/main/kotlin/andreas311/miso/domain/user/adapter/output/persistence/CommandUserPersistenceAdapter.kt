@@ -18,6 +18,6 @@ class CommandUserPersistenceAdapter(
 
     override fun deleteByEmail(email: String) {
         val userEntity = userRepository.findByEmail(email)
-        return userRepository.delete(userEntity)
+        return userEntity?.let { userRepository.delete(it) }!!
     }
 }
