@@ -48,7 +48,7 @@ class SignUpService(
             email = signUpDto.email,
             password = passwordEncodePort.passwordEncode(signUpDto.password),
             point = 0,
-            role = mutableListOf(Role.ROLE_USER),
+            role = Role.ROLE_USER,
         )
 
         commandUserPort.saveUser(user)
