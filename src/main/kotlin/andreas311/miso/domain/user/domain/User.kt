@@ -7,7 +7,7 @@ data class User(
     val email: String,
     val password: String,
     var point: Int,
-    val role: MutableList<Role>
+    val role: Role
 ) {
     fun addPoint(point: Int): User {
         synchronized(this) {
