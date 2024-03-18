@@ -5,10 +5,12 @@ import andreas311.miso.domain.auth.adapter.input.data.request.SignInRequest
 import andreas311.miso.domain.auth.adapter.input.data.request.SignUpRequest
 import andreas311.miso.domain.auth.adapter.input.data.response.TokenResponse
 import andreas311.miso.domain.auth.adapter.input.mapper.AuthDataMapper
+import andreas311.miso.domain.auth.application.port.input.LogoutUseCase
 import andreas311.miso.domain.auth.application.port.input.SignInUseCase
 import andreas311.miso.domain.auth.application.port.input.SignUpUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.Valid
@@ -18,6 +20,7 @@ class AuthAdapter(
     private val authDataMapper: AuthDataMapper,
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) {
     @PostMapping
     fun signUp(@RequestBody @Valid signUpRequest: SignUpRequest): ResponseEntity<Void> =
@@ -29,4 +32,9 @@ class AuthAdapter(
         signInUseCase.execute(authDataMapper toDto signInRequest)
             .let { authDataMapper toResponse it }
             .let { ResponseEntity.ok(it) }
+
+    @DeleteMapping
+    fun logout(): ResponseEntity<Void> =
+        logoutUseCase.execute()
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
