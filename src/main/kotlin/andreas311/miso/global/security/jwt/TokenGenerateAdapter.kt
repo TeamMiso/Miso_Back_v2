@@ -8,6 +8,7 @@ import andreas311.miso.global.security.jwt.common.properties.JwtTimeProperties
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
+import java.time.ZonedDateTime
 import java.util.*
 
 @Component
@@ -19,8 +20,8 @@ class TokenGenerateAdapter(
         TokenDto(
             accessToken = generateAccessToken(email, role),
             refreshToken = generateRefreshToken(email),
-            accessExp = jwtTimeProperties.accessTime,
-            refreshExp = jwtTimeProperties.refreshTime,
+            accessExp = ZonedDateTime.now().plusSeconds(jwtTimeProperties.accessTime),
+            refreshExp = ZonedDateTime.now().plusSeconds(jwtTimeProperties.refreshTime),
         )
 
     private fun generateAccessToken(email: String, role: Role): String =
