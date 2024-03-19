@@ -8,11 +8,10 @@ import andreas311.miso.domain.auth.adapter.input.mapper.AuthDataMapper
 import andreas311.miso.domain.auth.application.port.input.LogoutUseCase
 import andreas311.miso.domain.auth.application.port.input.SignInUseCase
 import andreas311.miso.domain.auth.application.port.input.SignUpUseCase
+import andreas311.miso.domain.auth.application.port.input.TokenReissueUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RequestController("/auth")
@@ -20,7 +19,8 @@ class AuthAdapter(
     private val authDataMapper: AuthDataMapper,
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val tokenReissueUseCase: TokenReissueUseCase
 ) {
     @PostMapping
     fun signUp(@RequestBody @Valid signUpRequest: SignUpRequest): ResponseEntity<Void> =
@@ -37,4 +37,10 @@ class AuthAdapter(
     fun logout(): ResponseEntity<Void> =
         logoutUseCase.execute()
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PatchMapping
+    fun reissue(@RequestHeader("Refresh-Token") refreshToken: String): ResponseEntity<TokenResponse> =
+        tokenReissueUseCase.execute(refreshToken)
+            .let { authDataMapper toResponse it }
+            .let { ResponseEntity.ok(it) }
 }

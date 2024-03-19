@@ -26,7 +26,7 @@ class TokenParseAdapter(
             .let { it ?: return null }
             .let { if (it.startsWith(JwtProperties.TOKEN_PREFIX)) it.replace(JwtProperties.TOKEN_PREFIX, "") else null }
 
-    override fun parseRefreshTokenToken(refreshToken: String): String? =
+    override fun parseRefreshToken(refreshToken: String): String? =
         if (refreshToken.startsWith(JwtProperties.TOKEN_PREFIX)) refreshToken.replace(JwtProperties.TOKEN_PREFIX, "") else null
 
     override fun authentication(token: String): Authentication =
