@@ -5,4 +5,6 @@ import java.util.UUID
 
 interface QueryRefreshTokenPort {
     fun findByUserIdOrNull(userId: UUID): RefreshToken?
+
+    fun findByRefreshTokenOrNull(refreshToken: String): RefreshToken?
 }
