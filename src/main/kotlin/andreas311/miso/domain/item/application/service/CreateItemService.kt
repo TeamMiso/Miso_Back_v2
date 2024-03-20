@@ -14,20 +14,10 @@ class CreateItemService(
     private val commandItemPort: CommandItemPort
 ) : CreateItemUseCase {
     override fun execute(createItemDto: CreateItemDto, multipartFile: MultipartFile?) {
-        if (multipartFile != null) {
-            val imageUrl = s3Util.execute(multipartFile)
-
-            commandItemPort.saveItem(
-                Item(
-                    id = 0L,
-                    price = createItemDto.price,
-                    amount = createItemDto.amount,
-                    name = createItemDto.name,
-                    content = createItemDto.content,
-                    imageUrl = imageUrl
-                )
-            )
-        }
+        val imageUrl =
+            if (multipartFile != null) {
+                s3Util.execute(multipartFile)
+            } else null
 
         commandItemPort.saveItem(
             Item(
@@ -36,7 +26,7 @@ class CreateItemService(
                 amount = createItemDto.amount,
                 name = createItemDto.name,
                 content = createItemDto.content,
-                imageUrl = null
+                imageUrl = imageUrl
             )
         )
     }
