@@ -46,9 +46,10 @@ class SecurityConfig(
 
             .antMatchers(HttpMethod.POST, "/email").permitAll()
 
-            .antMatchers(HttpMethod.POST, "/item").authenticated()
             .antMatchers(HttpMethod.GET, "/item").authenticated()
             .antMatchers(HttpMethod.GET, "/item/{id}").authenticated()
+            .antMatchers(HttpMethod.POST, "/item").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/item/{id}").authenticated()
 
             .antMatchers(HttpMethod.GET, "/user").authenticated()
             .antMatchers(HttpMethod.GET, "/user/point").authenticated()
