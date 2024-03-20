@@ -11,9 +11,9 @@ class CommandRefreshTokenPersistenceAdapter(
     private val refreshTokenMapper: RefreshTokenMapper,
     private val refreshTokenRepository: RefreshTokenRepository
 ): CommandRefreshTokenPort {
-    override fun saveRefreshToken(refreshToken: RefreshToken): String {
-        val refreshTokenEntity = refreshTokenMapper toEntity refreshToken
-        return refreshTokenRepository.save(refreshTokenEntity).refreshToken
+    override fun saveRefreshToken(refreshToken: RefreshToken): RefreshToken {
+        val refreshTokenEntity = refreshTokenRepository.save(refreshTokenMapper toEntity refreshToken)
+        return refreshTokenMapper.toDomain(refreshTokenEntity)!!
     }
 
     override fun deleteRefreshToken(refreshToken: RefreshToken) {
