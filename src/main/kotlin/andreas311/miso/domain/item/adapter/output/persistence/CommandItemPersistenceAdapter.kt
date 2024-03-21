@@ -15,4 +15,9 @@ class CommandItemPersistenceAdapter(
         val itemEntity = itemRepository.save(itemMapper toEntity item)
         return itemMapper.toDomain(itemEntity)!!
     }
+
+    override fun deleteItem(item: Item) {
+        val itemEntity = itemMapper toEntity item
+        return itemRepository.delete(itemEntity)
+    }
 }

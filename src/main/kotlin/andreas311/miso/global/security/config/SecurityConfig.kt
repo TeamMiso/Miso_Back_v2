@@ -41,22 +41,23 @@ class SecurityConfig(
 
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .antMatchers(HttpMethod.POST, "/auth/signIn").permitAll()
-            .antMatchers(HttpMethod.DELETE, "/auth").permitAll()
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
+            .antMatchers(HttpMethod.DELETE, "/auth").permitAll()
 
             .antMatchers(HttpMethod.POST, "/email").permitAll()
 
+            .antMatchers(HttpMethod.POST, "/item").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.GET, "/item").authenticated()
             .antMatchers(HttpMethod.GET, "/item/{id}").authenticated()
-            .antMatchers(HttpMethod.POST, "/item").authenticated()
-            .antMatchers(HttpMethod.PATCH, "/item/{id}").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/item/{id}").hasAuthority("ROLE_ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/item/{id}").hasAuthority("ROLE_ADMIN")
 
+            .antMatchers(HttpMethod.POST, "/user/give").authenticated()
             .antMatchers(HttpMethod.GET, "/user").authenticated()
             .antMatchers(HttpMethod.GET, "/user/point").authenticated()
-            .antMatchers(HttpMethod.POST, "/user/give").authenticated()
 
-            .antMatchers(HttpMethod.GET, "/purchase").authenticated()
             .antMatchers(HttpMethod.POST, "/purchase/{id}").authenticated()
+            .antMatchers(HttpMethod.GET, "/purchase").authenticated()
 
             .antMatchers(HttpMethod.POST, "/inquiry").authenticated()
             .antMatchers(HttpMethod.GET, "/inquiry").authenticated()
@@ -66,10 +67,10 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/inquiry/{id}").authenticated()
             .antMatchers(HttpMethod.PATCH, "/inquiry/respond/{id}").hasAuthority("ROLE_ADMIN")
 
+            .antMatchers(HttpMethod.POST, "/recyclables/process").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/search").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/all").authenticated()
-            .antMatchers(HttpMethod.POST, "/recyclables/process").authenticated()
 
             .antMatchers(HttpMethod.POST, "/notification/save/{deviceToken}").authenticated()
             .antMatchers(HttpMethod.GET, "/notification/{id}").authenticated()
