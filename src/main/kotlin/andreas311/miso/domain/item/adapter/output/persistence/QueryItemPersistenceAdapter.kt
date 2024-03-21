@@ -16,4 +16,9 @@ class QueryItemPersistenceAdapter(
         val itemEntity = itemRepository.findByIdOrNull(id)
         return itemMapper.toDomain(itemEntity)
     }
+
+    override fun findAll(): List<Item> {
+        val itemList = itemRepository.findAllByOrderByPriceAsc()
+        return itemList.map { itemMapper.toDomain(it)!! }
+    }
 }

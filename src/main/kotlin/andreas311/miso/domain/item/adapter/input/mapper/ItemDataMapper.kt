@@ -3,9 +3,12 @@ package andreas311.miso.domain.item.adapter.input.mapper
 import andreas311.miso.domain.item.adapter.input.data.request.CreateItemRequest
 import andreas311.miso.domain.item.adapter.input.data.request.EditItemRequest
 import andreas311.miso.domain.item.adapter.input.data.response.DetailItemResponse
+import andreas311.miso.domain.item.adapter.input.data.response.ItemResponse
+import andreas311.miso.domain.item.adapter.input.data.response.ListItemResponse
 import andreas311.miso.domain.item.application.port.input.dto.CreateItemDto
 import andreas311.miso.domain.item.application.port.input.dto.DetailItemDto
 import andreas311.miso.domain.item.application.port.input.dto.EditItemDto
+import andreas311.miso.domain.item.application.port.input.dto.ListItemDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -34,5 +37,17 @@ class ItemDataMapper {
             name = detailItemDto.name,
             content = detailItemDto.content,
             imageUrl = detailItemDto.imageUrl
+        )
+
+    fun toResponse(listItemDto: ListItemDto): ListItemResponse =
+        ListItemResponse(
+            listItemDto.itemList
+                .map { ItemResponse(
+                    id = it.id,
+                    price = it.price,
+                    amount = it.amount,
+                    name = it.name,
+                    imageUrl = it.imageUrl
+                ) }
         )
 }
