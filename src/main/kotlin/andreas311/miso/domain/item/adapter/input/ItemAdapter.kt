@@ -3,13 +3,16 @@ package andreas311.miso.domain.item.adapter.input
 import andreas311.miso.common.annotation.RequestController
 import andreas311.miso.domain.item.adapter.input.data.request.CreateItemRequest
 import andreas311.miso.domain.item.adapter.input.data.request.EditItemRequest
+import andreas311.miso.domain.item.adapter.input.data.response.DetailItemResponse
 import andreas311.miso.domain.item.adapter.input.mapper.ItemDataMapper
 import andreas311.miso.domain.item.application.port.input.CreateItemUseCase
 import andreas311.miso.domain.item.application.port.input.DeleteItemUseCase
+import andreas311.miso.domain.item.application.port.input.DetailItemUseCase
 import andreas311.miso.domain.item.application.port.input.EditItemUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,7 +24,8 @@ class ItemAdapter(
     private val itemDataMapper: ItemDataMapper,
     private val editItemUseCase: EditItemUseCase,
     private val createItemUseCase: CreateItemUseCase,
-    private val deleteItemUseCase: DeleteItemUseCase
+    private val detailItemUseCase: DetailItemUseCase,
+    private val deleteItemUseCase: DeleteItemUseCase,
 ) {
     @PostMapping
     fun create(
@@ -31,17 +35,23 @@ class ItemAdapter(
         createItemUseCase.execute(itemDataMapper toDto createItemRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
-    @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Void> =
-        deleteItemUseCase.execute(id)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+    @GetMapping("/{id}")
+    fun detail(@PathVariable id: Long): ResponseEntity<DetailItemResponse> =
+        detailItemUseCase.execute(id)
+            .let { itemDataMapper.toResponse(it)}
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
+
 
     @PatchMapping("/{id}")
-    fun edit (
+    fun edit(
         @PathVariable id: Long,
         @RequestPart(value = "file") multipartFile: MultipartFile?,
         @RequestPart(value = "item") editItemRequest: EditItemRequest
     ): ResponseEntity<Void> =
         editItemUseCase.execute(id, itemDataMapper toDto editItemRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.OK).build() }
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<Void> =
+        deleteItemUseCase.execute(id)
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
