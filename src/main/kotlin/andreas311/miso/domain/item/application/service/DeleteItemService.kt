@@ -10,7 +10,7 @@ import andreas311.miso.domain.item.application.port.output.QueryItemPort
 class DeleteItemService(
     private val queryItemPort: QueryItemPort,
     private val commandItemPort: CommandItemPort
-): DeleteItemUseCase {
+) : DeleteItemUseCase {
     override fun execute(id: Long) {
         val itemEntity = queryItemPort.findByIdOrNull(id)
             ?: throw ItemNotFoundException()

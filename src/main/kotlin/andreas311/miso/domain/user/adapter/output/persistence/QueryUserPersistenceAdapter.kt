@@ -12,7 +12,7 @@ import java.util.*
 class QueryUserPersistenceAdapter(
     private val userMapper: UserMapper,
     private val userRepository: UserRepository
-): QueryUserPort {
+) : QueryUserPort {
     override fun findByEmailOrNull(email: String): User? {
         val userEntity = userRepository.findByEmail(email)
         return userMapper.toDomain(userEntity)

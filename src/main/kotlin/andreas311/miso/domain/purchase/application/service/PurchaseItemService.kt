@@ -20,7 +20,7 @@ class PurchaseItemService(
     private val commandUserPort: CommandUserPort,
     private val userSecurityPort: UserSecurityPort,
     private val commandPurchasePort: CommandPurchasePort
-): PurchaseItemUseCase {
+) : PurchaseItemUseCase {
     override fun execute(id: Long) {
         val user = userSecurityPort.currentUser()
 

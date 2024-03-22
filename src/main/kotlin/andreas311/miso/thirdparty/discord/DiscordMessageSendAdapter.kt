@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class DiscordMessageSendAdapter(
     private val okHttpClient: OkHttpClient
-): DiscordMessageSendPort {
+) : DiscordMessageSendPort {
 
     @Value("\${discord.webhook.url}")
     private lateinit var discordWebhookUrl: String

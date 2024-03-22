@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class PasswordEncodeAdapter(
     private val passwordEncoder: PasswordEncoder
-): PasswordEncodePort {
+) : PasswordEncodePort {
     override fun passwordEncode(password: String): String =
         passwordEncoder.encode(password)
 

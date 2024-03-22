@@ -11,11 +11,11 @@ import andreas311.miso.domain.email.application.port.output.QueryEmailPort
 class RandomKeyConfirmService(
     private val commandEmailPort: CommandEmailPort,
     private val queryEmailPort: QueryEmailPort
-): RandomKeyConfirmUseCase {
+) : RandomKeyConfirmUseCase {
     override fun execute(randomKeyDto: RandomKeyDto) {
-            val email = queryEmailPort.findByRandomKeyOrNull(randomKeyDto.randomKey)
-                ?: throw EmailKeyInvalidException()
+        val email = queryEmailPort.findByRandomKeyOrNull(randomKeyDto.randomKey)
+            ?: throw EmailKeyInvalidException()
 
-            commandEmailPort.saveEmail(email.updateAuthentication(true))
+        commandEmailPort.saveEmail(email.updateAuthentication(true))
     }
 }

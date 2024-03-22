@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 @ReadOnlyRollbackService
 class UserDetailService(
     private val queryUserPort: QueryUserPort
-): UserDetailsService {
+) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails =
         queryUserPort.findByEmailOrNull(username)
             .let { it ?: throw UserNotFoundException() }

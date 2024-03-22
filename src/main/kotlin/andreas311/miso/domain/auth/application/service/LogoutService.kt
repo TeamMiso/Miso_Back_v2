@@ -12,7 +12,7 @@ class LogoutService(
     private val userSecurityPort: UserSecurityPort,
     private val queryRefreshTokenPort: QueryRefreshTokenPort,
     private val commandRefreshTokenPort: CommandRefreshTokenPort
-): LogoutUseCase {
+) : LogoutUseCase {
     override fun execute() {
         val user = userSecurityPort.currentUser()
 

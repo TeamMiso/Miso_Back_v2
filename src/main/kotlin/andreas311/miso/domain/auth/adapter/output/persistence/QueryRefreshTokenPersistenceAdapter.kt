@@ -12,7 +12,7 @@ import java.util.*
 class QueryRefreshTokenPersistenceAdapter(
     private val refreshTokenMapper: RefreshTokenMapper,
     private val refreshTokenRepository: RefreshTokenRepository
-): QueryRefreshTokenPort {
+) : QueryRefreshTokenPort {
     override fun findByUserIdOrNull(userId: UUID): RefreshToken? {
         val refreshTokenEntity = refreshTokenRepository.findByUserId(userId)
         return refreshTokenMapper.toDomain(refreshTokenEntity)

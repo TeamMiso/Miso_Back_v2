@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class CommandPurchasePersistenceAdapter(
     private val purchaseMapper: PurchaseMapper,
     private val purchaseRepository: PurchaseRepository
-): CommandPurchasePort {
+) : CommandPurchasePort {
     override fun savePurchase(purchase: Purchase): Purchase {
         val purchaseEntity = purchaseRepository.save(purchaseMapper toEntity purchase)
         return purchaseMapper.toDomain(purchaseEntity)!!

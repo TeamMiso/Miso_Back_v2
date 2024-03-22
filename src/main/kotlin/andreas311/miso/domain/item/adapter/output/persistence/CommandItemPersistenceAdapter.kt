@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class CommandItemPersistenceAdapter(
     private val itemMapper: ItemMapper,
     private val itemRepository: ItemRepository
-): CommandItemPort {
+) : CommandItemPort {
     override fun saveItem(item: Item): Item {
         val itemEntity = itemRepository.save(itemMapper toEntity item)
         return itemMapper.toDomain(itemEntity)!!

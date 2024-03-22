@@ -7,7 +7,7 @@ import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.MulticastMessage
 import com.google.firebase.messaging.Notification
 
-class FcmNotificationAdapter: FcmNotificationPort {
+class FcmNotificationAdapter : FcmNotificationPort {
     private val firebaseInstance: FirebaseMessaging
         get() = FirebaseMessaging.getInstance()
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserSecurityAdapter(
     private val queryUserPort: QueryUserPort
-): UserSecurityPort {
+) : UserSecurityPort {
     override fun currentUser(): User {
         val email = fetchUserEmail()
         return fetchUserByEmail(email)
@@ -23,7 +23,7 @@ class UserSecurityAdapter(
         queryUserPort.findByEmailOrNull(email) ?: throw UserNotFoundException()
 
     private fun fetchUserEmail(): String =
-        when(val principal = SecurityContextHolder.getContext().authentication.principal) {
+        when (val principal = SecurityContextHolder.getContext().authentication.principal) {
             is UserDetails -> {
                 when (principal) {
                     is UserDetail -> principal.username
@@ -31,6 +31,7 @@ class UserSecurityAdapter(
                     else -> throw IllegalArgumentException()
                 }
             }
-                else -> principal.toString()
+
+            else -> principal.toString()
         }
 }

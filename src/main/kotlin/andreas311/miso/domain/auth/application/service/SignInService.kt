@@ -19,7 +19,7 @@ class SignInService(
     private val queryEmailPort: QueryEmailPort,
     private val tokenGeneratePort: TokenGeneratePort,
     private val applicationEventPublisher: ApplicationEventPublisher
-): SignInUseCase {
+) : SignInUseCase {
     override fun execute(signInDto: SignInDto): TokenDto {
         val user = queryUserPort.findByEmailOrNull(signInDto.email)
             ?: throw UserNotFoundException()

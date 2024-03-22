@@ -15,7 +15,7 @@ import java.util.*
 class TokenGenerateAdapter(
     private val jwtProperties: JwtProperties,
     private val jwtTimeProperties: JwtTimeProperties
-): TokenGeneratePort {
+) : TokenGeneratePort {
     override fun generateToken(email: String, role: Role): TokenDto =
         TokenDto(
             accessToken = generateAccessToken(email, role),

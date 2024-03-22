@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 class QueryItemPersistenceAdapter(
     private val itemMapper: ItemMapper,
     private val itemRepository: ItemRepository
-): QueryItemPort {
+) : QueryItemPort {
     override fun findByIdOrNull(id: Long): Item? {
         val itemEntity = itemRepository.findByIdOrNull(id)
         return itemMapper.toDomain(itemEntity)

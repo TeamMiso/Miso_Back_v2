@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class JwtExceptionFilter: OncePerRequestFilter() {
+class JwtExceptionFilter : OncePerRequestFilter() {
     private val log = LoggerFactory.getLogger(this.javaClass.simpleName)
 
     @Throws(ServletException::class, IOException::class)

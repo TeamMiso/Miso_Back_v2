@@ -4,6 +4,6 @@ import andreas311.miso.domain.auth.adapter.output.persistence.entity.RefreshToke
 import org.springframework.data.repository.CrudRepository
 import java.util.UUID
 
-interface RefreshTokenRepository: CrudRepository<RefreshTokenEntity, String> {
+interface RefreshTokenRepository : CrudRepository<RefreshTokenEntity, String> {
     fun findByUserId(userId: UUID): RefreshTokenEntity?
 }
