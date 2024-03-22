@@ -15,7 +15,8 @@ class PurchaseMapper(
         PurchaseEntity(
             id = domain.id,
             user = userMapper.toEntity(domain.user),
-            item = itemMapper.toEntity(domain.item)
+            item = itemMapper.toEntity(domain.item),
+            createdDate = domain.createdDate
         )
 
     infix fun toDomain(entity: PurchaseEntity?): Purchase? =
@@ -23,7 +24,8 @@ class PurchaseMapper(
             Purchase(
                 id = entity.id,
                 user = userMapper.toDomain(it.user)!!,
-                item = itemMapper.toDomain(it.item)!!
+                item = itemMapper.toDomain(it.item)!!,
+                createdDate = entity.createdDate
             )
         }
 }

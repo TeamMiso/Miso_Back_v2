@@ -14,6 +14,6 @@ class WebMvcConfig : WebMvcConfigurer {
             .allowedMethods("*")
             .allowedHeaders("*")
             .allowCredentials(true)
-            .maxAge(3600);
+            .maxAge(3600)
     }
 }

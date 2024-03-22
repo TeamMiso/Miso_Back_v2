@@ -14,7 +14,7 @@ import javax.mail.MessagingException
 class EmailSendAdapter(
     private val javaMailSender: JavaMailSender,
     private val commandEmailPort: CommandEmailPort
-): EmailSendPort {
+) : EmailSendPort {
     override fun sendEmailAuthKey(email: String) {
         val randomKey = createRandomKey()
         sendAuthEmail(email, randomKey)

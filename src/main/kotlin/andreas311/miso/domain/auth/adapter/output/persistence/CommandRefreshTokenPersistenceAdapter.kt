@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class CommandRefreshTokenPersistenceAdapter(
     private val refreshTokenMapper: RefreshTokenMapper,
     private val refreshTokenRepository: RefreshTokenRepository
-): CommandRefreshTokenPort {
+) : CommandRefreshTokenPort {
     override fun saveRefreshToken(refreshToken: RefreshToken): RefreshToken {
         val refreshTokenEntity = refreshTokenRepository.save(refreshTokenMapper toEntity refreshToken)
         return refreshTokenMapper.toDomain(refreshTokenEntity)!!

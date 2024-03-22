@@ -22,12 +22,12 @@ class LoggingScheduler(
     lateinit var url: String
 
     @Scheduled(cron = "59 59 23 * * ?", zone = "Asia/Seoul")
-    fun sendLog(){
+    fun sendLog() {
         val logDir = "./src/main/resources/logs/"
         val logDirectory = File(logDir)
         val logUrlList = mutableListOf<String>()
         logDirectory.listFiles()
-            .forEach {file ->
+            .forEach { file ->
                 val fileName = file.name
                 val objectMetadata = ObjectMetadata()
                 objectMetadata.contentLength = file.length()
@@ -37,7 +37,7 @@ class LoggingScheduler(
                         .withCannedAcl(CannedAccessControlList.PublicRead)
                 )
                 file.delete()
-                logUrlList.add(url+fileName)
+                logUrlList.add(url + fileName)
             }
         val message = StringBuilder("**로그 목록**\\n")
         logUrlList.forEachIndexed { idx, str ->

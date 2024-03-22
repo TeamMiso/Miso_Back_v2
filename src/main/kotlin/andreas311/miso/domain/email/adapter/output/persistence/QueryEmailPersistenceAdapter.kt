@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class QueryEmailPersistenceAdapter(
     private val emailRepository: EmailRepository,
     private val emailMapper: EmailMapper
-): QueryEmailPort {
+) : QueryEmailPort {
     override fun findByEmailOrNull(email: String): Email? {
         val emailEntity = emailRepository.findByEmail(email)
         return emailMapper.toDomain(emailEntity)

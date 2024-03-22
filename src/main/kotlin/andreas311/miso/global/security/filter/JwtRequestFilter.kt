@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JwtRequestFilter(
     private val tokenParsePort: TokenParsePort
-): OncePerRequestFilter() {
+) : OncePerRequestFilter() {
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         val accessToken = tokenParsePort.parseAccessToken(request)
 

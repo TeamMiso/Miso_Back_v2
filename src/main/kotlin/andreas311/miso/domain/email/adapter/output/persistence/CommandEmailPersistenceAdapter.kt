@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class CommandEmailPersistenceAdapter(
     private val emailMapper: EmailMapper,
     private val emailRepository: EmailRepository
-): CommandEmailPort {
+) : CommandEmailPort {
     override fun saveEmail(email: Email): Email {
         val emailEntity = emailRepository.save(emailMapper.toEntity(email))
         return emailMapper.toDomain(emailEntity)!!

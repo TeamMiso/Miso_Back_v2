@@ -9,7 +9,7 @@ import andreas311.miso.domain.item.application.port.output.QueryItemPort
 @ReadOnlyRollbackService
 class ListItemService(
     private val queryItemPort: QueryItemPort
-): ListItemUseCase {
+) : ListItemUseCase {
     override fun execute(): ListItemDto {
         return ListItemDto(
             itemList = queryItemPort.findAll()

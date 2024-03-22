@@ -1,8 +1,8 @@
 package andreas311.miso.domain.purchase.adapter.output.persistence.entity
 
-import andreas311.miso.common.entitiy.BaseTimeEntity
 import andreas311.miso.domain.item.adapter.output.persistence.entity.ItemEntity
 import andreas311.miso.domain.user.adapter.output.persistence.entity.UserEntity
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -20,4 +20,7 @@ data class PurchaseEntity(
     @ManyToOne
     @JoinColumn(name = "item_id")
     val item: ItemEntity,
-): BaseTimeEntity()
+
+    @Column(name = "created_date", updatable = false)
+    val createdDate: LocalDateTime
+)

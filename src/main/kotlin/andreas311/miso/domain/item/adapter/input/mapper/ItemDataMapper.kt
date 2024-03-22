@@ -42,12 +42,14 @@ class ItemDataMapper {
     fun toResponse(listItemDto: ListItemDto): ListItemResponse =
         ListItemResponse(
             listItemDto.itemList
-                .map { ItemResponse(
-                    id = it.id,
-                    price = it.price,
-                    amount = it.amount,
-                    name = it.name,
-                    imageUrl = it.imageUrl
-                ) }
+                .map {
+                    ItemResponse(
+                        id = it.id,
+                        price = it.price,
+                        amount = it.amount,
+                        name = it.name,
+                        imageUrl = it.imageUrl
+                    )
+                }
         )
 }

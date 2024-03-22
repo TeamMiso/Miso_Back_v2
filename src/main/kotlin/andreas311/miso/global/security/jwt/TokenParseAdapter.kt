@@ -20,7 +20,7 @@ class TokenParseAdapter(
     private val userDetailService: UserDetailService,
     private val adminDetailService: AdminDetailService,
     private val jwtProperties: JwtProperties
-): TokenParsePort {
+) : TokenParsePort {
     override fun parseAccessToken(request: HttpServletRequest): String? =
         request.getHeader(JwtProperties.TOKEN_HEADER)
             .let { it ?: return null }
