@@ -12,14 +12,14 @@ data class User(
     fun addPoint(point: Int): User {
         synchronized(this) {
             this.point += point
+            return this
         }
-        return this
     }
 
     fun removePoint(point: Int): User {
         synchronized(this) {
             this.point -= point
+            return this
         }
-        return this
     }
 }
