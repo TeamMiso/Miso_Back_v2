@@ -9,6 +9,7 @@ import andreas311.miso.domain.purchase.application.exception.PointNotEnoughExcep
 import andreas311.miso.domain.purchase.application.port.input.PurchaseItemUseCase
 import andreas311.miso.domain.purchase.application.port.output.CommandPurchasePort
 import andreas311.miso.domain.purchase.domain.Purchase
+import java.time.LocalDateTime
 
 @RollbackService
 class PurchaseItemService(
@@ -36,7 +37,8 @@ class PurchaseItemService(
             Purchase(
                 id = 0L,
                 user = user,
-                item = item
+                item = item,
+                createdDate = LocalDateTime.now()
             )
         )
     }
