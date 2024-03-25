@@ -31,17 +31,13 @@ class PurchaseItemService(
             throw ItemSoldOutException()
         }
 
-        item.removeAmount()
-
         if (item.price > user.point) {
             throw PointNotEnoughException()
         }
 
-        user.removePoint(item.price)
+        commandItemPort.saveItem(item.removeAmount())
 
-        commandItemPort.saveItem(item)
-
-        commandUserPort.saveUser(user)
+        commandUserPort.saveUser(user.removePoint(item.price))
 
         commandPurchasePort.savePurchase(
             Purchase(
