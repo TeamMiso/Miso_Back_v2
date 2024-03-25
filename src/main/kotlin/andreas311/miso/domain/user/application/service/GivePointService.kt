@@ -9,7 +9,7 @@ import andreas311.miso.domain.user.application.port.output.CommandUserPort
 class GivePointService(
     private val commandUserPort: CommandUserPort,
     private val userSecurityPort: UserSecurityPort
-) : GivePointUseCase{
+) : GivePointUseCase {
     override fun execute() {
         val user = userSecurityPort.currentUser()
 
