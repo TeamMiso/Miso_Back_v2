@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import javax.validation.Valid
 
 @RequestController("/item")
 class ItemAdapter(
@@ -24,7 +25,7 @@ class ItemAdapter(
     @PostMapping
     fun create(
         @RequestPart(value = "file") multipartFile: MultipartFile?,
-        @RequestPart(value = "item") createItemRequest: CreateItemRequest
+        @RequestPart(value = "item") @Valid createItemRequest: CreateItemRequest
     ): ResponseEntity<Void> =
         createItemUseCase.execute(itemDataMapper toDto createItemRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
