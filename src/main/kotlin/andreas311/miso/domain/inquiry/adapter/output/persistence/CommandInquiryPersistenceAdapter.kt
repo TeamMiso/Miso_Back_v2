@@ -13,6 +13,6 @@ class CommandInquiryPersistenceAdapter(
 ) : CommandInquiryPort {
     override fun saveInquiry(inquiry: Inquiry): Inquiry {
         val inquiryEntity = inquiryRepository.save(inquiryMapper toEntity inquiry)
-        return inquiryMapper.toDomain(inquiryEntity)
+        return inquiryMapper.toDomain(inquiryEntity)!!
     }
 }
