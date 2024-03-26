@@ -20,14 +20,16 @@ class InquiryMapper(
             createdDate = domain.createdDate
         )
 
-    infix fun toDomain(entity: InquiryEntity): Inquiry =
-        Inquiry(
-            id = entity.id,
-            title = entity.title,
-            content = entity.content,
-            imageUrl = entity.imageUrl,
-            inquiryStatus = entity.inquiryStatus,
-            user = userMapper.toDomain(entity.user)!!,
-            createdDate = entity.createdDate
-        )
+    infix fun toDomain(entity: InquiryEntity?): Inquiry? =
+        entity?.let {
+            Inquiry(
+                id = entity.id,
+                title = entity.title,
+                content = entity.content,
+                imageUrl = entity.imageUrl,
+                inquiryStatus = entity.inquiryStatus,
+                user = userMapper.toDomain(entity.user)!!,
+                createdDate = entity.createdDate
+            )
+        }
 }
