@@ -61,8 +61,6 @@ class SecurityConfig(
 
             .antMatchers(HttpMethod.POST, "/inquiry").authenticated()
             .antMatchers(HttpMethod.GET, "/inquiry").authenticated()
-            .antMatchers(HttpMethod.GET, "/inquiry/list").authenticated()
-            .antMatchers(HttpMethod.GET, "/inquiry/all").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.GET, "/inquiry/filter/{state}").authenticated()
             .antMatchers(HttpMethod.GET, "/inquiry/{id}").authenticated()
             .antMatchers(HttpMethod.PATCH, "/inquiry/respond/{id}").hasAuthority("ROLE_ADMIN")

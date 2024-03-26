@@ -1,4 +1,4 @@
-package andreas311.miso.domain.inquiry.adapter.input.data
+package andreas311.miso.domain.inquiry.adapter.input.data.request
 
 import javax.validation.constraints.NotNull
 
