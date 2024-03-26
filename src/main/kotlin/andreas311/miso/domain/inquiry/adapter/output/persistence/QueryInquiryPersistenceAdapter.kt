@@ -4,6 +4,7 @@ import andreas311.miso.domain.inquiry.adapter.output.persistence.mapper.InquiryM
 import andreas311.miso.domain.inquiry.adapter.output.persistence.repository.InquiryRepository
 import andreas311.miso.domain.inquiry.application.port.output.QueryInquiryPort
 import andreas311.miso.domain.inquiry.domain.Inquiry
+import andreas311.miso.domain.inquiry.domain.InquiryStatus
 import andreas311.miso.domain.user.adapter.output.persistence.mapper.UserMapper
 import andreas311.miso.domain.user.domain.User
 import org.springframework.stereotype.Component
@@ -21,6 +22,16 @@ class QueryInquiryPersistenceAdapter(
 
     override fun findAllByUser(user: User): List<Inquiry> {
         val inquiryList = inquiryRepository.findByUserOrderByCreatedDateDesc(userMapper.toEntity(user))
+        return inquiryList.map { inquiryMapper.toDomain(it) }
+    }
+
+    override fun findAllByInquiryStatus(inquiryStatus: InquiryStatus): List<Inquiry> {
+        val inquiryList = inquiryRepository.findAllByInquiryStatusOrderByCreatedDateDesc(inquiryStatus)
+        return inquiryList.map { inquiryMapper.toDomain(it) }
+    }
+
+    override fun findAllByUserAndInquiryStatus(user: User, inquiryStatus: InquiryStatus): List<Inquiry> {
+        val inquiryList = inquiryRepository.findByUserAndInquiryStatusOrderByCreatedDateDesc(userMapper.toEntity(user), inquiryStatus)
         return inquiryList.map { inquiryMapper.toDomain(it) }
     }
 }

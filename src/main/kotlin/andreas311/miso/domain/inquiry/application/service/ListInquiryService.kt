@@ -1,4 +1,4 @@
-package andreas311.miso.domain.item.application.service
+package andreas311.miso.domain.inquiry.application.service
 
 import andreas311.miso.common.annotation.ReadOnlyRollbackService
 import andreas311.miso.domain.auth.application.port.output.UserSecurityPort
@@ -18,11 +18,11 @@ class ListInquiryService(
 
         return ListInquiryDto(
             inquiryList =
-                when (user.role) {
-                    Role.ROLE_USER -> queryInquiryPort.findAllByUser(user)
-                    else -> queryInquiryPort.findAll()
-                }
-                    .map { InquiryDto(it) }
+            when (user.role) {
+                Role.ROLE_USER -> queryInquiryPort.findAllByUser(user)
+                else -> queryInquiryPort.findAll()
+            }
+                .map { InquiryDto(it) }
         )
     }
 }
