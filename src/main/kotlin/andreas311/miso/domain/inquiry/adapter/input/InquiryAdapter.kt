@@ -2,8 +2,10 @@ package andreas311.miso.domain.inquiry.adapter.input
 
 import andreas311.miso.common.annotation.RequestController
 import andreas311.miso.domain.inquiry.adapter.input.data.request.WriteInquiryRequest
+import andreas311.miso.domain.inquiry.adapter.input.data.response.DetailInquiryResponse
 import andreas311.miso.domain.inquiry.adapter.input.data.response.ListInquiryResponse
 import andreas311.miso.domain.inquiry.adapter.input.mapper.InquiryDataMapper
+import andreas311.miso.domain.inquiry.application.port.input.DetailInquiryUseCase
 import andreas311.miso.domain.inquiry.application.port.input.ListFilterInquiryUseCase
 import andreas311.miso.domain.inquiry.application.port.input.ListInquiryUseCase
 import andreas311.miso.domain.inquiry.application.port.input.WriteInquiryUseCase
@@ -22,6 +24,7 @@ class InquiryAdapter(
     private val inquiryDataMapper: InquiryDataMapper,
     private val listInquiryUseCase: ListInquiryUseCase,
     private val writeInquiryUseCase: WriteInquiryUseCase,
+    private val detailInquiryUseCase: DetailInquiryUseCase,
     private val listFilterInquiryUseCase: ListFilterInquiryUseCase
 ) {
     @PostMapping
@@ -41,6 +44,12 @@ class InquiryAdapter(
     @GetMapping("/filter/{state}")
     fun listFiler(@PathVariable(name = "state") inquiryStatus: InquiryStatus): ResponseEntity<ListInquiryResponse> =
         listFilterInquiryUseCase.execute(inquiryStatus)
+            .let { inquiryDataMapper.toResponse(it) }
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
+
+    @GetMapping("/{id}")
+    fun detail(@PathVariable id: Long): ResponseEntity<DetailInquiryResponse> =
+        detailInquiryUseCase.execute(id)
             .let { inquiryDataMapper.toResponse(it) }
             .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 }
