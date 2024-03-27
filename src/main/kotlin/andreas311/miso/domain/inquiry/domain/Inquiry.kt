@@ -12,7 +12,8 @@ data class Inquiry(
     val user: User,
     val createdDate: LocalDateTime
 ) {
-    fun updateInquiryStatus(inquiryStatus: InquiryStatus) {
+    fun updateInquiryStatus(inquiryStatus: InquiryStatus): Inquiry {
         this.inquiryStatus = inquiryStatus
+        return this
     }
 }
