@@ -15,4 +15,9 @@ class CommandRecyclablesPersistenceAdapter(
         val recyclablesEntity = recyclablesRepository.save(recyclablesMapper toEntity recyclables)
         return recyclablesMapper.toDomain(recyclablesEntity)!!
     }
+
+    override fun deleteRecyclables(recyclables: Recyclables) {
+        val recyclablesEntity = recyclablesMapper toEntity recyclables
+        return recyclablesRepository.delete(recyclablesEntity)
+    }
 }
