@@ -15,8 +15,8 @@ class NotificationMapper(
         NotificationEntity(
             id = domain.id,
             answer = domain.answer,
-            user = userMapper.toEntity(domain.user),
-            inquiry = inquiryMapper.toEntity(domain.inquiry)
+            user = userMapper toEntity domain.user,
+            inquiry = inquiryMapper toEntity domain.inquiry
         )
 
     infix fun toDomain(entity: NotificationEntity?): Notification? =

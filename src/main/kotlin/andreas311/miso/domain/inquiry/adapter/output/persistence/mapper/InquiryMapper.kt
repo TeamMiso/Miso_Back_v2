@@ -16,7 +16,7 @@ class InquiryMapper(
             content = domain.content,
             imageUrl = domain.imageUrl,
             inquiryStatus = domain.inquiryStatus,
-            user = userMapper.toEntity(domain.user),
+            user = userMapper toEntity domain.user,
             createdDate = domain.createdDate
         )
 

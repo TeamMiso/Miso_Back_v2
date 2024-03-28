@@ -12,7 +12,7 @@ class CommandNotificationPersistenceAdapter(
     private val notificationRepository: NotificationRepository
 ) : CommandNotificationPort {
     override fun saveNotification(notification: Notification): Notification {
-        val notificationEntity = notificationRepository.save(notificationMapper.toEntity(notification))
+        val notificationEntity = notificationRepository.save(notificationMapper toEntity notification)
         return notificationMapper.toDomain(notificationEntity)!!
     }
 }

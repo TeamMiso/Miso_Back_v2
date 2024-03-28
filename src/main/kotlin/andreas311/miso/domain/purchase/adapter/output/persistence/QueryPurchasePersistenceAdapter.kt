@@ -15,7 +15,7 @@ class QueryPurchasePersistenceAdapter(
     private val purchaseRepository: PurchaseRepository
 ) : QueryPurchasePort {
     override fun findAllByUser(user: User): List<Purchase> {
-        val purchaseList = purchaseRepository.findAllByUserOrderByCreatedDateDesc(userMapper.toEntity(user))
+        val purchaseList = purchaseRepository.findAllByUserOrderByCreatedDateDesc(userMapper toEntity user)
         return purchaseList.map { purchaseMapper.toDomain(it)!! }
     }
 }

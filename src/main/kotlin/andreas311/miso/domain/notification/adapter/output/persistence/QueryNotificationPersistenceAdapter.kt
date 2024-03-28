@@ -13,6 +13,6 @@ class QueryNotificationPersistenceAdapter(
 ) : QueryNotificationPort {
     override fun findByInquiryIdOrNull(id: Long): Notification? {
         val notificationEntity = notificationRepository.findByInquiryId(id)
-        return notificationMapper.toDomain(notificationEntity)
+        return notificationMapper toDomain notificationEntity
     }
 }

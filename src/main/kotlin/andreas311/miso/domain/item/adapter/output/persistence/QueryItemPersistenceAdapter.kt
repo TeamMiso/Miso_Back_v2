@@ -14,7 +14,7 @@ class QueryItemPersistenceAdapter(
 ) : QueryItemPort {
     override fun findByIdOrNull(id: Long): Item? {
         val itemEntity = itemRepository.findByIdOrNull(id)
-        return itemMapper.toDomain(itemEntity)
+        return itemMapper toDomain itemEntity
     }
 
     override fun findAll(): List<Item> {
