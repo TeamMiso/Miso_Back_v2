@@ -12,7 +12,7 @@ class CommandEmailPersistenceAdapter(
     private val emailRepository: EmailRepository
 ) : CommandEmailPort {
     override fun saveEmail(email: Email): Email {
-        val emailEntity = emailRepository.save(emailMapper.toEntity(email))
+        val emailEntity = emailRepository.save(emailMapper toEntity email)
         return emailMapper.toDomain(emailEntity)!!
     }
 

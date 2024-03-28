@@ -15,7 +15,7 @@ class QueryUserPersistenceAdapter(
 ) : QueryUserPort {
     override fun findByEmailOrNull(email: String): User? {
         val userEntity = userRepository.findByEmail(email)
-        return userMapper.toDomain(userEntity)
+        return userMapper toDomain userEntity
     }
 
     override fun existsByEmail(email: String): Boolean =
@@ -23,6 +23,6 @@ class QueryUserPersistenceAdapter(
 
     override fun findByIdOrNull(id: UUID): User? {
         val userEntity = userRepository.findByIdOrNull(id)
-        return userMapper.toDomain(userEntity)
+        return userMapper toDomain userEntity
     }
 }

@@ -13,7 +13,7 @@ class QueryEmailPersistenceAdapter(
 ) : QueryEmailPort {
     override fun findByEmailOrNull(email: String): Email? {
         val emailEntity = emailRepository.findByEmail(email)
-        return emailMapper.toDomain(emailEntity)
+        return emailMapper toDomain emailEntity
     }
 
     override fun existsByEmail(email: String): Boolean =
@@ -21,6 +21,6 @@ class QueryEmailPersistenceAdapter(
 
     override fun findByRandomKeyOrNull(randomKey: String): Email? {
         val emailEntity = emailRepository.findByRandomKey(randomKey)
-        return emailMapper.toDomain(emailEntity)
+        return emailMapper toDomain emailEntity
     }
 }

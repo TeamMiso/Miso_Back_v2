@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class EmailMapper {
-    fun toEntity(domain: Email): EmailEntity =
+    infix fun toEntity(domain: Email): EmailEntity =
         EmailEntity(
             id = domain.id,
             email = domain.email,
@@ -14,7 +14,7 @@ class EmailMapper {
             authentication = domain.authentication
         )
 
-    fun toDomain(entity: EmailEntity?): Email? =
+    infix fun toDomain(entity: EmailEntity?): Email? =
         entity?.let {
             Email(
                 id = entity.id,

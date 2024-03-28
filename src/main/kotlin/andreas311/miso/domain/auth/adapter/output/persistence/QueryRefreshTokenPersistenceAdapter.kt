@@ -15,11 +15,11 @@ class QueryRefreshTokenPersistenceAdapter(
 ) : QueryRefreshTokenPort {
     override fun findByUserIdOrNull(userId: UUID): RefreshToken? {
         val refreshTokenEntity = refreshTokenRepository.findByUserId(userId)
-        return refreshTokenMapper.toDomain(refreshTokenEntity)
+        return refreshTokenMapper toDomain refreshTokenEntity
     }
 
     override fun findByRefreshTokenOrNull(refreshToken: String): RefreshToken? {
         val refreshTokenEntity = refreshTokenRepository.findByIdOrNull(refreshToken)
-        return refreshTokenMapper.toDomain(refreshTokenEntity)
+        return refreshTokenMapper toDomain refreshTokenEntity
     }
 }

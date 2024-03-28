@@ -18,7 +18,7 @@ class QueryInquiryPersistenceAdapter(
 ) : QueryInquiryPort {
     override fun findByIdOrNull(id: Long): Inquiry? {
         val inquiryEntity = inquiryRepository.findByIdOrNull(id)
-        return inquiryMapper.toDomain(inquiryEntity)
+        return inquiryMapper toDomain inquiryEntity
     }
 
     override fun findAll(): List<Inquiry> {
@@ -27,7 +27,7 @@ class QueryInquiryPersistenceAdapter(
     }
 
     override fun findAllByUser(user: User): List<Inquiry> {
-        val inquiryList = inquiryRepository.findByUserOrderByCreatedDateDesc(userMapper.toEntity(user))
+        val inquiryList = inquiryRepository.findByUserOrderByCreatedDateDesc(userMapper toEntity user)
         return inquiryList.map { inquiryMapper.toDomain(it)!! }
     }
 
@@ -37,7 +37,7 @@ class QueryInquiryPersistenceAdapter(
     }
 
     override fun findAllByUserAndInquiryStatus(user: User, inquiryStatus: InquiryStatus): List<Inquiry> {
-        val inquiryList = inquiryRepository.findByUserAndInquiryStatusOrderByCreatedDateDesc(userMapper.toEntity(user), inquiryStatus)
+        val inquiryList = inquiryRepository.findByUserAndInquiryStatusOrderByCreatedDateDesc(userMapper toEntity user, inquiryStatus)
         return inquiryList.map { inquiryMapper.toDomain(it)!! }
     }
 }
