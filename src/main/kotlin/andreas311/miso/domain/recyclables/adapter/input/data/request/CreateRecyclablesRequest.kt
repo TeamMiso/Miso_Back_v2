@@ -1,4 +1,4 @@
-package andreas311.miso.domain.recyclables.adapter.input.data
+package andreas311.miso.domain.recyclables.adapter.input.data.request
 
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import javax.validation.constraints.NotNull
