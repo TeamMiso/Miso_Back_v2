@@ -46,7 +46,7 @@ class ItemAdapter(
     fun edit(
         @PathVariable id: Long,
         @RequestPart(value = "file") multipartFile: MultipartFile?,
-        @RequestPart(value = "item") editItemRequest: EditItemRequest
+        @RequestPart(value = "item") @Valid editItemRequest: EditItemRequest
     ): ResponseEntity<Void> =
         editItemUseCase.execute(id, itemDataMapper toDto editItemRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.OK).build() }

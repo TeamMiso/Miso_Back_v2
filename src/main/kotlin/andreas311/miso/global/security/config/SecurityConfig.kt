@@ -70,6 +70,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/recyclables").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/search").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/all").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/recyclables/{id}").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.DELETE, "/recyclables/{id}").hasAuthority("ROLE_ADMIN")
 
             .antMatchers(HttpMethod.POST, "/notification/save/{deviceToken}").authenticated()
