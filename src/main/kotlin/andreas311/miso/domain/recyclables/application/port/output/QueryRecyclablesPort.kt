@@ -6,4 +6,5 @@ import andreas311.miso.domain.recyclables.domain.RecyclablesType
 interface QueryRecyclablesPort {
     fun findByIdOrNull(id: Long): Recyclables?
     fun findByRecyclablesTypeOrNull(recyclablesType: RecyclablesType): Recyclables?
+    fun findAll(): List<Recyclables>
 }
