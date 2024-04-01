@@ -67,7 +67,7 @@ class SecurityConfig(
 
             .antMatchers(HttpMethod.POST, "/recyclables").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.POST, "/recyclables/process").authenticated()
-            .antMatchers(HttpMethod.GET, "/recyclables").authenticated()
+            .antMatchers(HttpMethod.GET, "/recyclables/{type}").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/search").authenticated()
             .antMatchers(HttpMethod.GET, "/recyclables/all").authenticated()
             .antMatchers(HttpMethod.PATCH, "/recyclables/{id}").hasAuthority("ROLE_ADMIN")

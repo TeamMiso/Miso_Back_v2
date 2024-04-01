@@ -2,7 +2,9 @@ package andreas311.miso.domain.recyclables.adapter.input.mapper
 
 import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
+import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
 import andreas311.miso.domain.recyclables.application.port.input.dto.CreateRecyclablesDto
+import andreas311.miso.domain.recyclables.application.port.input.dto.DetailRecyclablesDto
 import andreas311.miso.domain.recyclables.application.port.input.dto.EditRecyclablesDto
 import org.springframework.stereotype.Component
 
@@ -28,5 +30,18 @@ class RecyclablesDataMapper {
             recycleCaution = editRecyclablesRequest.recycleCaution,
             recyclablesType = editRecyclablesRequest.recyclablesType,
             recycleMark = editRecyclablesRequest.recycleMark
+        )
+
+    fun toResponse(detailRecyclablesDto: DetailRecyclablesDto): DetailRecyclablesResponse =
+        DetailRecyclablesResponse(
+            id = detailRecyclablesDto.id,
+            title = detailRecyclablesDto.title,
+            subTitle = detailRecyclablesDto.subTitle,
+            recycleMethod = detailRecyclablesDto.recycleMethod,
+            recycleTip = detailRecyclablesDto.recycleTip,
+            recycleCaution = detailRecyclablesDto.recycleCaution,
+            imageUrl = detailRecyclablesDto.imageUrl,
+            recyclablesType = detailRecyclablesDto.recyclablesType,
+            recycleMark = detailRecyclablesDto.recycleMark
         )
 }
