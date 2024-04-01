@@ -4,11 +4,9 @@ import andreas311.miso.common.annotation.RequestController
 import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
+import andreas311.miso.domain.recyclables.adapter.input.data.response.ListRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.mapper.RecyclablesDataMapper
-import andreas311.miso.domain.recyclables.application.port.input.CreateRecyclablesUseCase
-import andreas311.miso.domain.recyclables.application.port.input.DeleteRecyclablesUseCase
-import andreas311.miso.domain.recyclables.application.port.input.DetailRecyclablesUseCase
-import andreas311.miso.domain.recyclables.application.port.input.EditRecyclablesUseCase
+import andreas311.miso.domain.recyclables.application.port.input.*
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -24,6 +22,7 @@ import javax.validation.Valid
 @RequestController("/recyclables")
 class RecyclablesAdapter(
     private val recyclablesDataMapper: RecyclablesDataMapper,
+    private val listRecyclablesUseCase: ListRecyclablesUseCase,
     private val editRecyclablesUseCase: EditRecyclablesUseCase,
     private val createRecyclablesUseCase: CreateRecyclablesUseCase,
     private val detailRecyclablesUseCase: DetailRecyclablesUseCase,
@@ -40,6 +39,12 @@ class RecyclablesAdapter(
     @GetMapping("/{type}")
     fun detail(@PathVariable(name = "type") recyclablesType: RecyclablesType): ResponseEntity<DetailRecyclablesResponse> =
         detailRecyclablesUseCase.execute(recyclablesType)
+            .let { recyclablesDataMapper.toResponse(it) }
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
+
+    @GetMapping
+    fun list(): ResponseEntity<ListRecyclablesResponse> =
+        listRecyclablesUseCase.execute()
             .let { recyclablesDataMapper.toResponse(it) }
             .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 
