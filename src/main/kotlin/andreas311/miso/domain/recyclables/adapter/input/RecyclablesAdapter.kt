@@ -3,13 +3,17 @@ package andreas311.miso.domain.recyclables.adapter.input
 import andreas311.miso.common.annotation.RequestController
 import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
+import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.mapper.RecyclablesDataMapper
 import andreas311.miso.domain.recyclables.application.port.input.CreateRecyclablesUseCase
 import andreas311.miso.domain.recyclables.application.port.input.DeleteRecyclablesUseCase
+import andreas311.miso.domain.recyclables.application.port.input.DetailRecyclablesUseCase
 import andreas311.miso.domain.recyclables.application.port.input.EditRecyclablesUseCase
+import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,7 +26,8 @@ class RecyclablesAdapter(
     private val recyclablesDataMapper: RecyclablesDataMapper,
     private val editRecyclablesUseCase: EditRecyclablesUseCase,
     private val createRecyclablesUseCase: CreateRecyclablesUseCase,
-    private val deleteRecyclablesUseCase: DeleteRecyclablesUseCase
+    private val detailRecyclablesUseCase: DetailRecyclablesUseCase,
+    private val deleteRecyclablesUseCase: DeleteRecyclablesUseCase,
 ) {
     @PostMapping
     fun create(
@@ -32,10 +37,11 @@ class RecyclablesAdapter(
         createRecyclablesUseCase.execute(recyclablesDataMapper toDto createRecyclablesRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
-    @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Void> =
-        deleteRecyclablesUseCase.execute(id)
-            .let { ResponseEntity.status(HttpStatus.OK).build() }
+    @GetMapping("/{type}")
+    fun detail(@PathVariable(name = "type") recyclablesType: RecyclablesType): ResponseEntity<DetailRecyclablesResponse> =
+        detailRecyclablesUseCase.execute(recyclablesType)
+            .let { recyclablesDataMapper.toResponse(it) }
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 
     @PatchMapping("/{id}")
     fun edit(
@@ -45,4 +51,10 @@ class RecyclablesAdapter(
     ): ResponseEntity<Void> =
         editRecyclablesUseCase.execute(id, recyclablesDataMapper toDto editRecyclablesRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.OK).build() }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<Void> =
+        deleteRecyclablesUseCase.execute(id)
+            .let { ResponseEntity.status(HttpStatus.OK).build() }
+
 }
