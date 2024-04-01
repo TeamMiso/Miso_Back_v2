@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface RecyclablesRepository : CrudRepository<RecyclablesEntity, Long> {
     fun findByRecyclablesType(recyclablesType: RecyclablesType): RecyclablesEntity?
+    fun findAllByOrderByTitleAsc(): List<RecyclablesEntity>
 }
