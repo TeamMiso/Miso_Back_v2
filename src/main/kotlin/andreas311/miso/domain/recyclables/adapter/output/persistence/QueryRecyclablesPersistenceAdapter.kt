@@ -22,4 +22,9 @@ class QueryRecyclablesPersistenceAdapter(
         val recyclablesEntity = recyclablesRepository.findByRecyclablesType(recyclablesType)
         return recyclablesMapper toDomain recyclablesEntity
     }
+
+    override fun findAll(): List<Recyclables> {
+        val recyclablesList = recyclablesRepository.findAllByOrderByTitleAsc()
+        return recyclablesList.map { recyclablesMapper.toDomain(it)!! }
+    }
 }
