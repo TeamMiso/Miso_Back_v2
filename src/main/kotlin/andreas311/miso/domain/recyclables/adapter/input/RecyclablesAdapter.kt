@@ -5,6 +5,7 @@ import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyc
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.data.response.ListRecyclablesResponse
+import andreas311.miso.domain.recyclables.adapter.input.data.response.RecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.mapper.RecyclablesDataMapper
 import andreas311.miso.domain.recyclables.application.port.input.*
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
@@ -25,6 +27,7 @@ class RecyclablesAdapter(
     private val listRecyclablesUseCase: ListRecyclablesUseCase,
     private val editRecyclablesUseCase: EditRecyclablesUseCase,
     private val createRecyclablesUseCase: CreateRecyclablesUseCase,
+    private val searchRecyclablesUseCase: SearchRecyclablesUseCase,
     private val detailRecyclablesUseCase: DetailRecyclablesUseCase,
     private val deleteRecyclablesUseCase: DeleteRecyclablesUseCase,
 ) {
@@ -39,6 +42,12 @@ class RecyclablesAdapter(
     @GetMapping("/{type}")
     fun detail(@PathVariable(name = "type") recyclablesType: RecyclablesType): ResponseEntity<DetailRecyclablesResponse> =
         detailRecyclablesUseCase.execute(recyclablesType)
+            .let { recyclablesDataMapper.toResponse(it) }
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
+
+    @GetMapping("/search")
+    fun detail(@RequestParam searchValue: String): ResponseEntity<RecyclablesResponse> =
+        searchRecyclablesUseCase.execute(searchValue)
             .let { recyclablesDataMapper.toResponse(it) }
             .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 
