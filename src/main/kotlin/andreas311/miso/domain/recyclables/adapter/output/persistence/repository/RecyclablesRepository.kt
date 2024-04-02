@@ -4,7 +4,7 @@ import andreas311.miso.domain.recyclables.adapter.output.persistence.entity.Recy
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import org.springframework.data.repository.CrudRepository
 
-interface RecyclablesRepository : CrudRepository<RecyclablesEntity, Long> {
+interface RecyclablesRepository : CrudRepository<RecyclablesEntity, Long>, RecyclablesRepositoryCustom {
     fun findByRecyclablesType(recyclablesType: RecyclablesType): RecyclablesEntity?
     fun findAllByOrderByTitleAsc(): List<RecyclablesEntity>
 }
