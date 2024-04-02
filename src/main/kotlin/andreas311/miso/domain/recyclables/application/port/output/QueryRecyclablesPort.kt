@@ -7,4 +7,5 @@ interface QueryRecyclablesPort {
     fun findByIdOrNull(id: Long): Recyclables?
     fun findByRecyclablesTypeOrNull(recyclablesType: RecyclablesType): Recyclables?
     fun findAll(): List<Recyclables>
+    fun search(searchValue: String): Recyclables?
 }
