@@ -77,6 +77,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/notification/{id}").authenticated()
 
             .antMatchers(HttpMethod.GET, "/environment").authenticated()
+            .antMatchers(HttpMethod.POST, "/environment").hasAuthority("ROLE_ADMIN")
 
             .anyRequest().denyAll()
             .and()
