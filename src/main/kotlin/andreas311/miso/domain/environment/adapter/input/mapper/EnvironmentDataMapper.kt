@@ -1,7 +1,9 @@
 package andreas311.miso.domain.environment.adapter.input.mapper
 
 import andreas311.miso.domain.environment.adapter.input.data.request.CreateEnvironmentRequest
+import andreas311.miso.domain.environment.adapter.input.data.request.EditEnvironmentRequest
 import andreas311.miso.domain.environment.application.port.input.dto.CreateEnvironmentDto
+import andreas311.miso.domain.environment.application.port.input.dto.EditEnvironmentDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -10,5 +12,11 @@ class EnvironmentDataMapper {
         CreateEnvironmentDto(
             title = createEnvironmentRequest.title,
             content = createEnvironmentRequest.content
+        )
+
+    infix fun toDto(editEnvironmentRequest: EditEnvironmentRequest): EditEnvironmentDto =
+        EditEnvironmentDto(
+            title = editEnvironmentRequest.title,
+            content = editEnvironmentRequest.content
         )
 }
