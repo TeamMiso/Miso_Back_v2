@@ -6,5 +6,5 @@ data class CreateEnvironmentRequest(
     @field:NotNull
     val title: String,
     @field:NotNull
-    val content: String,
+    val content: String
 )
