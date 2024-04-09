@@ -15,4 +15,9 @@ class CommandEnvironmentPersistenceAdapter(
         val environmentEntity = environmentRepository.save(environmentMapper toEntity environment)
         return environmentMapper.toDomain(environmentEntity)!!
     }
+
+    override fun deleteEnvironment(environment: Environment) {
+        val environmentEntity = environmentMapper toEntity environment
+        return environmentRepository.delete(environmentEntity)
+    }
 }
