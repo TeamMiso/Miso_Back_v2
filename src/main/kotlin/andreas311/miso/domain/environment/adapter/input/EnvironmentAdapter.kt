@@ -5,9 +5,11 @@ import andreas311.miso.domain.environment.adapter.input.data.request.CreateEnvir
 import andreas311.miso.domain.environment.adapter.input.data.request.EditEnvironmentRequest
 import andreas311.miso.domain.environment.adapter.input.mapper.EnvironmentDataMapper
 import andreas311.miso.domain.environment.application.port.input.CreateEnvironmentUseCase
+import andreas311.miso.domain.environment.application.port.input.DeleteEnvironmentUseCase
 import andreas311.miso.domain.environment.application.port.input.EditEnvironmentUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +21,8 @@ import javax.validation.Valid
 class EnvironmentAdapter(
     private val environmentDataMapper: EnvironmentDataMapper,
     private val editEnvironmentUseCase: EditEnvironmentUseCase,
-    private val createEnvironmentUseCase: CreateEnvironmentUseCase
+    private val createEnvironmentUseCase: CreateEnvironmentUseCase,
+    private val deleteEnvironmentUseCase: DeleteEnvironmentUseCase
 ) {
     @PostMapping
     fun create(
@@ -36,5 +39,10 @@ class EnvironmentAdapter(
         @RequestPart(value = "environment") @Valid editEnvironmentRequest: EditEnvironmentRequest
     ): ResponseEntity<Void> =
         editEnvironmentUseCase.execute(id, environmentDataMapper toDto editEnvironmentRequest, multipartFile)
+            .let { ResponseEntity.status(HttpStatus.OK).build() }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<Void> =
+        deleteEnvironmentUseCase.execute(id)
             .let { ResponseEntity.status(HttpStatus.OK).build() }
 }
