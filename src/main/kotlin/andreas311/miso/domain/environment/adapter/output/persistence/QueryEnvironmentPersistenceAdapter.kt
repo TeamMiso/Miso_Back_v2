@@ -16,4 +16,9 @@ class QueryEnvironmentPersistenceAdapter(
         val environmentEntity = environmentRepository.findByIdOrNull(id)
         return environmentMapper toDomain environmentEntity
     }
+
+    override fun findAll(): List<Environment> {
+        val environmentList = environmentRepository.findAll()
+        return environmentList.map { environmentMapper.toDomain(it)!! }
+    }
 }
