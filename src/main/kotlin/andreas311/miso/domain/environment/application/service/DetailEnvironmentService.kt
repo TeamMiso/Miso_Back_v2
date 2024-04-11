@@ -10,7 +10,7 @@ class DetailEnvironmentService(
     private val queryTodayEnvironmentPort: QueryTodayEnvironmentPort
 ) : DetailEnvironmentUseCase {
     override fun execute(): DetailEnvironmentDto {
-        val environment = queryTodayEnvironmentPort.findAll().first()
+        val environment = queryTodayEnvironmentPort.findOne()
 
         return DetailEnvironmentDto(environment)
     }
