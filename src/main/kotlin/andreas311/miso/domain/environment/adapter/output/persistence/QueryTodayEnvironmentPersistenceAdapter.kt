@@ -11,8 +11,8 @@ class QueryTodayEnvironmentPersistenceAdapter(
     private val todayEnvironmentMapper: TodayEnvironmentMapper,
     private val todayEnvironmentRepository: TodayEnvironmentRepository
 ) : QueryTodayEnvironmentPort {
-    override fun findAll(): List<TodayEnvironment> {
-        val todayEnvironmentList = todayEnvironmentRepository.findAll()
-        return todayEnvironmentList.map { todayEnvironmentMapper.toDomain(it)!! }
+    override fun findOne(): TodayEnvironment {
+        val todayEnvironment = todayEnvironmentRepository.findAll().first()
+        return todayEnvironmentMapper.toDomain(todayEnvironment)!!
     }
 }
