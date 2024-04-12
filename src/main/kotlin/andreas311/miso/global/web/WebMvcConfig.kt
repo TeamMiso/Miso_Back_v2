@@ -10,7 +10,7 @@ class WebMvcConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
 
         registry.addMapping("/**")
-            .allowedOrigins("https://miso-admin.vercel.app", "http://localhost:5173", "http://localhost:3000")
+            .allowedOrigins("https://miso-admin.vercel.app", "http://localhost:3000")
             .allowedMethods("*")
             .allowedHeaders("*")
             .allowCredentials(true)
