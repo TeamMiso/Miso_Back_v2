@@ -16,4 +16,9 @@ class QueryDeviceTokenPersistenceAdapter(
         val deviceTokenEntity = deviceTokenRepository.findByUserId(id)
         return deviceTokenMapper toDomain deviceTokenEntity
     }
+
+    override fun findAll(): List<DeviceToken> {
+        val deviceTokenList = deviceTokenRepository.findAll()
+        return deviceTokenList.map { deviceTokenMapper.toDomain(it)!! }
+    }
 }

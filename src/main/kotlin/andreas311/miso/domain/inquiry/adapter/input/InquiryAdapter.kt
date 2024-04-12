@@ -21,7 +21,7 @@ class InquiryAdapter(
     private val writeInquiryUseCase: WriteInquiryUseCase,
     private val detailInquiryUseCase: DetailInquiryUseCase,
     private val listFilterInquiryUseCase: ListFilterInquiryUseCase,
-    private val writeInquiryRespondUseCase: WriteInquiryRespondUseCase
+    private val inquiryRespondUseCase: InquiryRespondUseCase
 ) {
     @PostMapping
     fun write(
@@ -51,6 +51,6 @@ class InquiryAdapter(
 
     @PatchMapping("/respond/{id}")
     fun respond(@PathVariable id: Long, @RequestBody @Valid writeInquiryRespondRequest: WriteInquiryRespondRequest): ResponseEntity<Void> =
-        writeInquiryRespondUseCase.execute(id, inquiryDataMapper toDto writeInquiryRespondRequest)
+        inquiryRespondUseCase.execute(id, inquiryDataMapper toDto writeInquiryRespondRequest)
             .let { ResponseEntity.status(HttpStatus.OK).build() }
 }

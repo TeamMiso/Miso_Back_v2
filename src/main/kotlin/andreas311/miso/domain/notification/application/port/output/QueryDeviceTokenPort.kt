@@ -5,4 +5,5 @@ import java.util.UUID
 
 interface QueryDeviceTokenPort {
     fun findByUserIdOrNull(id: UUID): DeviceToken?
+    fun findAll(): List<DeviceToken>
 }
