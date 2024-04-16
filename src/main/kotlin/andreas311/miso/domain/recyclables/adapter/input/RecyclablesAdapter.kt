@@ -4,6 +4,7 @@ import andreas311.miso.common.annotation.RequestController
 import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
+import andreas311.miso.domain.recyclables.adapter.input.data.response.ListDetailRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.data.response.ListRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.data.response.RecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.mapper.RecyclablesDataMapper
@@ -30,6 +31,7 @@ class RecyclablesAdapter(
     private val searchRecyclablesUseCase: SearchRecyclablesUseCase,
     private val detailRecyclablesUseCase: DetailRecyclablesUseCase,
     private val deleteRecyclablesUseCase: DeleteRecyclablesUseCase,
+    private val processRecyclablesUseCase: ProcessRecyclablesUseCase
 ) {
     @PostMapping
     fun create(
@@ -38,6 +40,12 @@ class RecyclablesAdapter(
     ): ResponseEntity<Void> =
         createRecyclablesUseCase.execute(recyclablesDataMapper toDto createRecyclablesRequest, multipartFile)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @PostMapping("/process")
+    fun process(@RequestPart(value = "recyclables") multipartFile: MultipartFile): ResponseEntity<ListDetailRecyclablesResponse> =
+        processRecyclablesUseCase.execute(multipartFile)
+            .let { recyclablesDataMapper.toResponse(it) }
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 
     @GetMapping("/{type}")
     fun detail(@PathVariable(name = "type") recyclablesType: RecyclablesType): ResponseEntity<DetailRecyclablesResponse> =
