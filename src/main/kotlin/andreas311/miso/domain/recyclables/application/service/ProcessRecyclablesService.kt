@@ -10,6 +10,7 @@ import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
 @ReadOnlyRollbackService
@@ -23,13 +24,16 @@ class ProcessRecyclablesService(
     private val url: String = ""
 
     override fun execute(multipartFile: MultipartFile): ListDetailRecyclablesDto {
-        val resultList = webClient.post()
-            .uri(url)
-            .bodyValue(s3Util.execute(multipartFile))
-            .retrieve()
-            .bodyToMono(List::class.java)
-            .map { it as List<String> }
-            .block() ?: throw RecyclablesNotFoundException()
+        val imageUrl = s3Util.execute(multipartFile)
+
+        val resultList =
+            webClient.post()
+                .uri(url)
+                .body(BodyInserters.fromValue(mapOf("imageURL" to imageUrl)))
+                .retrieve()
+                .bodyToMono(List::class.java)
+                .map { it as List<String> }
+                .block() ?: throw RecyclablesNotFoundException()
 
         val detailRecyclablesList = resultList.map { recyclablesType ->
             queryRecyclablesPort.findByRecyclablesTypeOrNull(RecyclablesType.valueOf(recyclablesType))
