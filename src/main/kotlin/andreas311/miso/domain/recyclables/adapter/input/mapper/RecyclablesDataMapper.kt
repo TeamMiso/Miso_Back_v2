@@ -3,6 +3,7 @@ package andreas311.miso.domain.recyclables.adapter.input.mapper
 import andreas311.miso.domain.recyclables.adapter.input.data.request.CreateRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.request.EditRecyclablesRequest
 import andreas311.miso.domain.recyclables.adapter.input.data.response.DetailRecyclablesResponse
+import andreas311.miso.domain.recyclables.adapter.input.data.response.ListDetailRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.data.response.ListRecyclablesResponse
 import andreas311.miso.domain.recyclables.adapter.input.data.response.RecyclablesResponse
 import andreas311.miso.domain.recyclables.application.port.input.dto.*
@@ -62,6 +63,24 @@ class RecyclablesDataMapper {
                         imageUrl = it.imageUrl,
                         recycleMethod = it.recycleMethod,
                         recyclablesType = it.recyclablesType
+                    )
+                }
+        )
+
+    fun toResponse(listDetailRecyclablesDto: ListDetailRecyclablesDto): ListDetailRecyclablesResponse =
+        ListDetailRecyclablesResponse(
+            listDetailRecyclablesDto.recyclablesList
+                .map {
+                    DetailRecyclablesResponse(
+                        id = it.id,
+                        title = it.title,
+                        subTitle = it.subTitle,
+                        recycleMethod = it.recycleMethod,
+                        recycleTip = it.recycleTip,
+                        recycleCaution = it.recycleCaution,
+                        imageUrl = it.imageUrl,
+                        recyclablesType = it.recyclablesType,
+                        recycleMark = it.recycleMark
                     )
                 }
         )
