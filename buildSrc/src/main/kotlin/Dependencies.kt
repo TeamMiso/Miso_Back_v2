@@ -38,4 +38,7 @@ object Dependencies {
     // mapper
     const val MAPPER = "org.mapstruct:mapstruct:${DependencyVersions.MAPPER_VERSION}.Final"
     const val MAPPER_APT = "org.mapstruct:mapstruct-processor:${DependencyVersions.MAPPER_VERSION}.Final"
+
+    // web_flux
+    const val WEB_FLUX = "org.springframework.boot:spring-boot-starter-webflux"
 }

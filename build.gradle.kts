@@ -71,6 +71,9 @@ dependencies {
 	// mapper
 	implementation(Dependencies.MAPPER)
 	kapt(Dependencies.MAPPER_APT)
+
+	// web_flux
+	implementation(Dependencies.WEB_FLUX)
 }
 
 tasks.withType<KotlinCompile> {
