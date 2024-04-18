@@ -42,7 +42,7 @@ class RecyclablesAdapter(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PostMapping("/process")
-    fun process(@RequestPart(value = "recyclables") multipartFile: MultipartFile): ResponseEntity<ListDetailRecyclablesResponse> =
+    suspend fun process(@RequestPart(value = "recyclables") multipartFile: MultipartFile): ResponseEntity<ListDetailRecyclablesResponse> =
         processRecyclablesUseCase.execute(multipartFile)
             .let { recyclablesDataMapper.toResponse(it) }
             .let { ResponseEntity.status(HttpStatus.OK).body(it) }
