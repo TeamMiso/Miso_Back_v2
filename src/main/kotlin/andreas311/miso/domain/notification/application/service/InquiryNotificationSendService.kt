@@ -23,7 +23,7 @@ class InquiryNotificationSendService(
                 deviceToken = token,
                 notificationAlarm = NotificationAlarm(
                     title = notificationType.title,
-                    content = notificationType.content,
+                    body = notificationType.body,
                     writer = "미소"
                 )
             )
