@@ -4,5 +4,5 @@ import andreas311.miso.domain.recyclables.application.port.input.dto.ListDetailR
 import org.springframework.web.multipart.MultipartFile
 
 interface ProcessRecyclablesUseCase {
-    fun execute(multipartFile: MultipartFile): ListDetailRecyclablesDto
+    suspend fun execute(multipartFile: MultipartFile): ListDetailRecyclablesDto
 }

@@ -8,6 +8,7 @@ import andreas311.miso.domain.recyclables.application.port.input.dto.ListDetailR
 import andreas311.miso.domain.recyclables.application.port.output.QueryRecyclablesPort
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
+import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.reactive.function.BodyInserters
@@ -22,23 +23,19 @@ class ProcessRecyclablesService(
     @Value("\${ai.url}")
     private val url: String = ""
 
-    override fun execute(multipartFile: MultipartFile): ListDetailRecyclablesDto {
+    override suspend fun execute(multipartFile: MultipartFile): ListDetailRecyclablesDto {
         val imageUrl = s3Util.execute(multipartFile)
 
-        val resultList =
-            webClient.post()
-                .uri(url)
-                .body(BodyInserters.fromValue(mapOf("imageURL" to imageUrl)))
-                .retrieve()
-                .bodyToMono(List::class.java)
-                .map { it as List<String> }
-                .block() ?: throw RecyclablesNotFoundException()
+        val resultList = webClient.post()
+            .uri(url)
+            .body(BodyInserters.fromValue(mapOf("imageURL" to imageUrl)))
+            .retrieve()
+            .bodyToMono(List::class.java)
+            .awaitSingleOrNull()
 
-        val detailRecyclablesList = resultList.map { recyclablesType ->
-            queryRecyclablesPort.findByRecyclablesTypeOrNull(RecyclablesType.valueOf(recyclablesType))
-        }
-
-        val recyclablesList = detailRecyclablesList.filterNotNull().map { DetailRecyclablesDto(it) }
+        val recyclablesList = resultList?.mapNotNull { recyclablesType ->
+            queryRecyclablesPort.findByRecyclablesTypeOrNull(RecyclablesType.valueOf(recyclablesType as String))
+        }?.map { DetailRecyclablesDto(it) } ?: throw RecyclablesNotFoundException()
 
         return ListDetailRecyclablesDto(recyclablesList)
     }

@@ -13,6 +13,7 @@ object Dependencies {
     // kotlin
     const val KOTLIN_JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
+    const val KOTLIN_KOROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
 
     // db
     const val MARIA_DATABASE = "org.mariadb.jdbc:mariadb-java-client:${DependencyVersions.MARIA_DATABASE_VERSION}"

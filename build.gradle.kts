@@ -28,6 +28,7 @@ dependencies {
 	// kotlin
 	implementation(Dependencies.KOTLIN_JACKSON)
 	implementation(Dependencies.KOTLIN_REFLECT)
+	implementation(Dependencies.KOTLIN_KOROUTINES)
 
 	// web
 	implementation(Dependencies.WEB)
