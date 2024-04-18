@@ -19,7 +19,6 @@ class ProcessRecyclablesService(
     private val webClient: WebClient,
     private val queryRecyclablesPort: QueryRecyclablesPort
 ) : ProcessRecyclablesUseCase {
-
     @Value("\${ai.url}")
     private val url: String = ""
 
