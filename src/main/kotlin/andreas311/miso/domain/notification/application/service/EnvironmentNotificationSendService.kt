@@ -19,7 +19,7 @@ class EnvironmentNotificationSendService(
                 deviceTokens = queryDeviceTokenPort.findAll().map { it.deviceToken },
                 notificationAlarm = NotificationAlarm(
                     title = NotificationType.ENVIRONMENT.title,
-                    content = NotificationType.ENVIRONMENT.content,
+                    body = NotificationType.ENVIRONMENT.body,
                     writer = "미소"
                 )
             )
