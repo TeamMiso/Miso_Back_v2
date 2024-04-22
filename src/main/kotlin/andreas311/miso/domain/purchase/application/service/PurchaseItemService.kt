@@ -11,6 +11,7 @@ import andreas311.miso.domain.purchase.application.port.input.PurchaseItemUseCas
 import andreas311.miso.domain.purchase.application.port.output.CommandPurchasePort
 import andreas311.miso.domain.purchase.domain.Purchase
 import andreas311.miso.domain.user.application.port.output.CommandUserPort
+import org.springframework.cache.annotation.CacheEvict
 import java.time.LocalDateTime
 
 @RollbackService
@@ -21,6 +22,7 @@ class PurchaseItemService(
     private val userSecurityPort: UserSecurityPort,
     private val commandPurchasePort: CommandPurchasePort
 ) : PurchaseItemUseCase {
+    @CacheEvict(cacheNames = ["userPoint"], key = "'userPoint'", cacheManager = "redisCacheManager")
     override fun execute(id: Long) {
         val user = userSecurityPort.currentUser()
 
