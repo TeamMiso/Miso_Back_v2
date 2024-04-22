@@ -13,6 +13,7 @@ object Dependencies {
     // kotlin
     const val KOTLIN_JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
+    const val KOTLIN_KOROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
 
     // db
     const val MARIA_DATABASE = "org.mariadb.jdbc:mariadb-java-client:${DependencyVersions.MARIA_DATABASE_VERSION}"
@@ -34,4 +35,11 @@ object Dependencies {
 
     // fcm
     const val FCM = "com.google.firebase:firebase-admin:${DependencyVersions.FCM_VERSION}"
+
+    // mapper
+    const val MAPPER = "org.mapstruct:mapstruct:${DependencyVersions.MAPPER_VERSION}.Final"
+    const val MAPPER_APT = "org.mapstruct:mapstruct-processor:${DependencyVersions.MAPPER_VERSION}.Final"
+
+    // web_flux
+    const val WEB_FLUX = "org.springframework.boot:spring-boot-starter-webflux"
 }

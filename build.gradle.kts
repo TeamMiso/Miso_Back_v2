@@ -28,6 +28,7 @@ dependencies {
 	// kotlin
 	implementation(Dependencies.KOTLIN_JACKSON)
 	implementation(Dependencies.KOTLIN_REFLECT)
+	implementation(Dependencies.KOTLIN_KOROUTINES)
 
 	// web
 	implementation(Dependencies.WEB)
@@ -67,6 +68,13 @@ dependencies {
 
 	// fcm
 	implementation(Dependencies.FCM)
+
+	// mapper
+	implementation(Dependencies.MAPPER)
+	kapt(Dependencies.MAPPER_APT)
+
+	// web_flux
+	implementation(Dependencies.WEB_FLUX)
 }
 
 tasks.withType<KotlinCompile> {
