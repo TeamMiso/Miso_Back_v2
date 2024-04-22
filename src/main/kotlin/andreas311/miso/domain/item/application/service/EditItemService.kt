@@ -7,6 +7,7 @@ import andreas311.miso.domain.item.application.port.output.CommandItemPort
 import andreas311.miso.domain.item.application.port.output.QueryItemPort
 import andreas311.miso.domain.item.domain.Item
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 
@@ -16,6 +17,7 @@ class EditItemService(
     private val queryItemPort: QueryItemPort,
     private val commandItemPort: CommandItemPort
 ) : EditItemUseCase {
+    @CacheEvict(cacheNames = ["item"], key = "#id", cacheManager = "redisCacheManager")
     override fun execute(id: Long, editItemDto: EditItemDto, multipartFile: MultipartFile?) {
         val item = queryItemPort.findByIdOrNull(id)
             ?: throw ItemNotFoundException()

@@ -19,7 +19,7 @@ class RedisConfig(
         LettuceConnectionFactory(redisProperties.host, redisProperties.port)
 
     @Bean
-    fun redisTemplate(): RedisTemplate<String, String> {
+    fun redisTemplateManager(): RedisTemplate<String, String> {
         val redisTemplate = RedisTemplate<String, String>()
         redisTemplate.keySerializer = StringRedisSerializer()
         redisTemplate.valueSerializer = StringRedisSerializer()
