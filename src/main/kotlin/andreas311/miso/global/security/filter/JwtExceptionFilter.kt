@@ -26,7 +26,7 @@ class JwtExceptionFilter : OncePerRequestFilter() {
             val errorCode = when (exception) {
                 is ExpiredJwtException -> ErrorCode.TOKEN_IS_EXPIRED
                 is JwtException, is IllegalArgumentException -> ErrorCode.TOKEN_NOT_VALID
-                else -> ErrorCode.UNKNOWN_ERROR
+                else -> ErrorCode.UNKNOWN_ERROR.also { exception.printStackTrace() }
             }
 
             setErrorResponse(errorCode, response)
@@ -38,9 +38,6 @@ class JwtExceptionFilter : OncePerRequestFilter() {
                         else -> "Exception"
                     }
                     log.debug("================= [ ExceptionHandlerFilter ] 에서 $debugMessage 발생 ===================")
-                    if (exception is IllegalArgumentException) {
-                        exception.printStackTrace()
-                    }
                 }
         }
     }
