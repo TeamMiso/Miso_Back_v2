@@ -9,6 +9,7 @@ import andreas311.miso.domain.recyclables.application.port.output.QueryRecyclabl
 import andreas311.miso.domain.recyclables.domain.Recyclables
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
 import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Caching
 import org.springframework.web.multipart.MultipartFile
 
 @RollbackService
@@ -17,7 +18,10 @@ class EditRecyclablesService(
     private val queryRecyclablesPort: QueryRecyclablesPort,
     private val commandRecyclablesPort: CommandRecyclablesPort
 ) : EditRecyclablesUseCase {
-    @CacheEvict(cacheNames = ["recyclables"], key = "#editRecyclablesDto.recyclablesType", cacheManager = "redisCacheManager")
+    @Caching(evict = [
+        CacheEvict(cacheNames = ["recyclables"], key = "#editRecyclablesDto.recyclablesType", cacheManager = "redisCacheManager"),
+        CacheEvict(cacheNames = ["recyclablesList"], key = "'recyclablesList'", cacheManager = "redisCacheManager")
+    ])
     override fun execute(id: Long, editRecyclablesDto: EditRecyclablesDto, multipartFile: MultipartFile?) {
         val recyclables = queryRecyclablesPort.findByIdOrNull(id)
             ?: throw RecyclablesNotFoundException()
