@@ -15,4 +15,11 @@ data class RecyclablesDto(
         recycleMethod = recyclables.recycleMethod,
         recyclablesType = recyclables.recyclablesType
     )
+
+    constructor() : this(
+        title = "",
+        imageUrl = null,
+        recycleMethod = "",
+        recyclablesType = RecyclablesType.BAG
+    )
 }
