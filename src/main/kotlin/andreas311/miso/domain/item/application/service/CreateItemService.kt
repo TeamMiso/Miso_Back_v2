@@ -6,6 +6,7 @@ import andreas311.miso.domain.item.application.port.input.dto.CreateItemDto
 import andreas311.miso.domain.item.application.port.output.CommandItemPort
 import andreas311.miso.domain.item.domain.Item
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.web.multipart.MultipartFile
 
 @RollbackService
@@ -13,6 +14,7 @@ class CreateItemService(
     private val s3Util: S3Util,
     private val commandItemPort: CommandItemPort
 ) : CreateItemUseCase {
+    @CacheEvict(cacheNames = ["itemList"], key = "'itemList'", cacheManager = "redisCacheManager")
     override fun execute(createItemDto: CreateItemDto, multipartFile: MultipartFile?) {
         val imageUrl =
             if (multipartFile != null) {
