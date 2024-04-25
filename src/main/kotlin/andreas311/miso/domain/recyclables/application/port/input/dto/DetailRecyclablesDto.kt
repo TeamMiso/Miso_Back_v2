@@ -4,15 +4,15 @@ import andreas311.miso.domain.recyclables.domain.Recyclables
 import andreas311.miso.domain.recyclables.domain.RecyclablesType
 
 data class DetailRecyclablesDto(
-    val id: Long = 0L,
-    val title: String = "",
-    val subTitle: String = "",
-    val recycleMethod: String = "",
-    val recycleTip: String = "",
-    val recycleCaution: String = "",
-    val imageUrl: String? = "",
-    val recyclablesType: RecyclablesType = RecyclablesType.BAG,
-    val recycleMark: String = ""
+    val id: Long,
+    val title: String,
+    val subTitle: String,
+    val recycleMethod: String,
+    val recycleTip: String,
+    val recycleCaution: String,
+    val imageUrl: String?,
+    val recyclablesType: RecyclablesType,
+    val recycleMark: String
 ) {
     constructor(recyclables: Recyclables) : this(
         id = recyclables.id,
@@ -24,5 +24,17 @@ data class DetailRecyclablesDto(
         imageUrl = recyclables.imageUrl,
         recyclablesType = recyclables.recyclablesType,
         recycleMark = recyclables.recycleMark
+    )
+
+    constructor() : this(
+        id = 0L,
+        title = "",
+        subTitle = "",
+        recycleMethod = "",
+        recycleTip = "",
+        recycleCaution = "",
+        imageUrl = null,
+        recyclablesType = RecyclablesType.BAG,
+        recycleMark = ""
     )
 }
