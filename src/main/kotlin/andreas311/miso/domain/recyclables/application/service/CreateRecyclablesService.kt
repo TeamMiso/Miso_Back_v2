@@ -6,6 +6,7 @@ import andreas311.miso.domain.recyclables.application.port.input.dto.CreateRecyc
 import andreas311.miso.domain.recyclables.application.port.output.CommandRecyclablesPort
 import andreas311.miso.domain.recyclables.domain.Recyclables
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.web.multipart.MultipartFile
 
 @RollbackService
@@ -13,6 +14,7 @@ class CreateRecyclablesService(
     private val s3Util: S3Util,
     private val commandRecyclablesPort: CommandRecyclablesPort
 ) : CreateRecyclablesUseCase {
+    @CacheEvict(cacheNames = ["recyclablesList"], key = "'recyclablesList'", cacheManager = "redisCacheManager")
     override fun execute(createRecyclablesDto: CreateRecyclablesDto, multipartFile: MultipartFile?) {
         val imageUrl =
             if (multipartFile != null) {

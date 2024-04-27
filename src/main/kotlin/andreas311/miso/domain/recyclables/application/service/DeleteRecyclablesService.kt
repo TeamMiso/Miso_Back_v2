@@ -12,7 +12,7 @@ class DeleteRecyclablesService(
     private val queryRecyclablesPort: QueryRecyclablesPort,
     private val commandRecyclablesPort: CommandRecyclablesPort
 ) : DeleteRecyclablesUseCase {
-    @CacheEvict(cacheNames = ["recyclables"], key = "#id", cacheManager = "redisCacheManager")
+    @CacheEvict(cacheNames = ["recyclablesList"], key = "'recyclablesList'", cacheManager = "redisCacheManager")
     override fun execute(id: Long) {
         val recyclablesEntity = queryRecyclablesPort.findByIdOrNull(id)
             ?: throw RecyclablesNotFoundException()
