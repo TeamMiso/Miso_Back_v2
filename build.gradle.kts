@@ -75,6 +75,9 @@ dependencies {
 
 	// web_flux
 	implementation(Dependencies.WEB_FLUX)
+
+	// thymeleaf
+	implementation(Dependencies.THYMELEAF)
 }
 
 tasks.withType<KotlinCompile> {
