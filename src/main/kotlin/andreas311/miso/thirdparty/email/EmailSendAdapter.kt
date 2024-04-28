@@ -7,13 +7,16 @@ import andreas311.miso.domain.email.domain.Email
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Component
+import org.thymeleaf.context.Context
+import org.thymeleaf.spring5.SpringTemplateEngine
 import java.util.*
 import javax.mail.MessagingException
 
 @Component
 class EmailSendAdapter(
     private val javaMailSender: JavaMailSender,
-    private val commandEmailPort: CommandEmailPort
+    private val commandEmailPort: CommandEmailPort,
+    private val springTemplateEngine: SpringTemplateEngine
 ) : EmailSendPort {
     override fun sendEmailAuthKey(email: String) {
         val randomKey = createRandomKey()
@@ -21,30 +24,12 @@ class EmailSendAdapter(
     }
 
     private fun sendAuthEmail(email: String, randomKey: String) {
-        val subject = "MISO 인증번호가 도착했습니다!"
-        val content = buildEmailContent(randomKey)
-
         try {
-            sendEmail(email, subject, content)
+            sendEmail(email, randomKey)
         } catch (e: MessagingException) {
             throw EmailSendFailedException()
         }
         saveEmailToRepository(email, randomKey)
-    }
-
-    private fun buildEmailContent(randomKey: String): String {
-        return """
-            <div style='margin:100px;'>
-            <h1> 안녕하세요 MISO 입니다! </h1>
-            <br>
-            <h2><p>아래 인증번호를 인증 페이지로 돌아가 입력해 주세요. 이용해 주셔서 감사합니다!<p></h2>
-            <br>
-            <div align='center' style='border:1px solid black; font-family:verdana';>
-            <h3 style='color:blue;'>인증번호는 다음과 같습니다!</h3>
-            <div style='font-size:130%'>
-            인증번호 : <strong>$randomKey</strong><div><br/> 
-            </div>
-        """.trimIndent()
     }
 
     private fun saveEmailToRepository(email: String, randomKey: String) {
@@ -58,12 +43,13 @@ class EmailSendAdapter(
         )
     }
 
-    private fun sendEmail(email: String, subject: String, content: String) {
+    private fun sendEmail(email: String, randomKey: String) {
         val mimeMessage = javaMailSender.createMimeMessage()
         val helper = MimeMessageHelper(mimeMessage, true, "utf-8")
+        val mailTemplate = createMailTemplate(randomKey)
         helper.setTo(email)
-        helper.setSubject(subject)
-        helper.setText(content, true)
+        helper.setSubject("MISO 인증번호가 도착했습니다!")
+        helper.setText(mailTemplate, true)
         javaMailSender.send(mimeMessage)
     }
 
@@ -73,5 +59,16 @@ class EmailSendAdapter(
         val randomKey = random.nextInt(8888) + 1111
 
         return randomKey.toString()
+    }
+
+    private fun createMailTemplate(randomKey: String): String {
+        val content = Context()
+        val randomKey = randomKey
+        content.setVariables(
+            mapOf(
+                "randomKey" to randomKey
+            )
+        )
+        return springTemplateEngine.process("mailTemplate", content)
     }
 }
