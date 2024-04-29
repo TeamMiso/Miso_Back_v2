@@ -42,4 +42,7 @@ object Dependencies {
 
     // web_flux
     const val WEB_FLUX = "org.springframework.boot:spring-boot-starter-webflux"
+
+    // thymeleaf
+    const val THYMELEAF = "org.springframework.boot:spring-boot-starter-thymeleaf"
 }

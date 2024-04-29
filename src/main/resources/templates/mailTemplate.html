@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body style="margin: 0; padding: 0">
+<div
+        style="
+        background-color: #25d07d;
+        width: 100%;
+        height: 1rem;
+        position: absolute;
+      "
+/>
+<div style="margin: 0 1.5rem">
+    <div style="margin-top: 2.5rem">
+        <img
+                src="https://project-miso.s3.ap-northeast-2.amazonaws.com/fcm/%EB%AF%B8%EC%86%8C+%EC%95%84%EC%9D%B4%EC%BD%98.png"
+                alt="miso_icon"
+                style="width: 2.5rem"
+        />
+        <h1 style="font-size: 1.5625rem; line-height: 160%; margin: 0">
+            미소 이메일 인증 번호
+        </h1>
+    </div>
+    <div
+            style="
+          margin-top: 1.5rem;
+          color: #595959;
+          font-size: 1.25rem;
+          font-weight: 400;
+        "
+    >
+        안녕하세요 MISO에요! <br />
+        미소를 이용해 주셔서 감사해요 :) <br />
+        위 4자리 숫자를 입력하시면 회원가입 절차가 완료돼요!
+    </div>
+    <div
+            style="
+          width: 100%;
+          border-radius: 0.5rem;
+          padding: 1rem;
+          box-sizing: border-box;
+          background-color: #f2f2f2;
+          margin-top: 1.5rem;
+          text-align: center;
+        "
+    >
+            <div style="
+            margin: 0;
+            color: #25d07d;
+            line-height: 140%;
+            font-size: 2.875rem;
+            font-weight: 600;
+          "
+                    th:text="${randomKey}"
+            >
+            </div>
+            <div style="font-size: 1rem; color: #bfbfbf; line-height: 160%"
+            >환경을 웃음으로 바꾸다, MISO</div
+            >
+
+    </div>
+</div>
+</body>
+</html>
