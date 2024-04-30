@@ -1,5 +1,6 @@
 package andreas311.miso.domain.item.application.service
 
+import andreas311.miso.common.annotation.RollbackService
 import andreas311.miso.domain.item.application.exception.ItemNotFoundException
 import andreas311.miso.domain.item.application.port.input.EditItemUseCase
 import andreas311.miso.domain.item.application.port.input.dto.EditItemDto
@@ -9,10 +10,9 @@ import andreas311.miso.domain.item.domain.Item
 import andreas311.miso.thirdparty.aws.s3.util.S3Util
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Caching
-import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 
-@Component
+@RollbackService
 class EditItemService(
     private val s3Util: S3Util,
     private val queryItemPort: QueryItemPort,
