@@ -55,6 +55,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/user/give").authenticated()
             .antMatchers(HttpMethod.GET, "/user").authenticated()
             .antMatchers(HttpMethod.GET, "/user/point").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/user/{id}").hasAuthority("ROLE_ADMIN")
 
             .antMatchers(HttpMethod.POST, "/purchase/{id}").authenticated()
             .antMatchers(HttpMethod.GET, "/purchase").authenticated()
