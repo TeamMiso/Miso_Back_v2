@@ -2,15 +2,13 @@ package andreas311.miso.domain.user.application.service
 
 import andreas311.miso.common.annotation.ReadOnlyRollbackService
 import andreas311.miso.domain.auth.application.port.output.UserSecurityPort
-import andreas311.miso.domain.user.application.port.input.UserInfoUseCase
+import andreas311.miso.domain.user.application.port.input.GetUserInfoUseCase
 import andreas311.miso.domain.user.application.port.input.dto.UserInfoDto
-import org.springframework.cache.annotation.Cacheable
 
 @ReadOnlyRollbackService
-class UserInfoService(
+class GetUserInfoService(
     private val userSecurityPort: UserSecurityPort
-) : UserInfoUseCase {
-    @Cacheable(cacheNames = ["user"], key = "'userInfo'", cacheManager = "redisCacheManager")
+) : GetUserInfoUseCase {
     override fun execute(): UserInfoDto {
         val user = userSecurityPort.currentUser()
 
