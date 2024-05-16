@@ -82,6 +82,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.PATCH, "/environment/{id}").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.DELETE, "/environment/{id}").hasAuthority("ROLE_ADMIN")
 
+            .antMatchers("/actuator/prometheus").permitAll()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()
