@@ -9,7 +9,6 @@ object Dependencies {
     const val WEB = "org.springframework.boot:spring-boot-starter-web"
     const val SPRING_CLOUD = "org.springframework.cloud:spring-cloud-starter-aws:${DependencyVersions.SPRING_CLOUD_VERSION}"
 
-
     // kotlin
     const val KOTLIN_JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
@@ -45,4 +44,10 @@ object Dependencies {
 
     // thymeleaf
     const val THYMELEAF = "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    // actuator
+    const val ACTUATOR = "org.springframework.boot:spring-boot-starter-actuator"
+
+    // prometheus
+    const val PROMETHEUS = "io.micrometer:micrometer-registry-prometheus"
 }

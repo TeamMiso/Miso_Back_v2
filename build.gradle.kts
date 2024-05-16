@@ -78,6 +78,12 @@ dependencies {
 
 	// thymeleaf
 	implementation(Dependencies.THYMELEAF)
+
+	// actuator
+	implementation(Dependencies.ACTUATOR)
+
+	// prometheus
+	runtimeOnly(Dependencies.PROMETHEUS)
 }
 
 tasks.withType<KotlinCompile> {
