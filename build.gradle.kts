@@ -84,6 +84,9 @@ dependencies {
 
 	// prometheus
 	runtimeOnly(Dependencies.PROMETHEUS)
+
+	// chat_gpt
+	implementation(Dependencies.CHAT_GPT)
 }
 
 tasks.withType<KotlinCompile> {

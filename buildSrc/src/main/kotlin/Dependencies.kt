@@ -50,4 +50,7 @@ object Dependencies {
 
     // prometheus
     const val PROMETHEUS = "io.micrometer:micrometer-registry-prometheus"
+
+    // chat_gpt
+    const val CHAT_GPT = "io.github.flashvayne:chatgpt-spring-boot-starter:${DependencyVersions.CHAT_GPT_VERSION}"
 }

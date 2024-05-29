@@ -77,3 +77,6 @@ management:
     web:
       exposure:
         include: "*"
+
+chatgpt:
+  api-key: ${CHAT_GPT_KEY}

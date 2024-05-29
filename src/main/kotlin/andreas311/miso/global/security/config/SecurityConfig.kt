@@ -84,6 +84,8 @@ class SecurityConfig(
 
             .antMatchers("/actuator/prometheus").permitAll()
 
+            .antMatchers(HttpMethod.POST, "/chat/question").authenticated()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()

@@ -23,4 +23,7 @@ object DependencyVersions {
 
     // mapper
     const val MAPPER_VERSION = "1.5.2"
+
+    // chat_gpt
+    const val CHAT_GPT_VERSION = "1.0.5"
 }
