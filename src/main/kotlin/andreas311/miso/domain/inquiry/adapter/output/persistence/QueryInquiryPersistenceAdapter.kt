@@ -26,18 +26,13 @@ class QueryInquiryPersistenceAdapter(
         return inquiryList.map { inquiryMapper.toDomain(it)!! }
     }
 
-    override fun findAllByUser(user: User): List<Inquiry> {
-        val inquiryList = inquiryRepository.findByUserOrderByCreatedDateDesc(userMapper toEntity user)
-        return inquiryList.map { inquiryMapper.toDomain(it)!! }
-    }
-
     override fun findAllByInquiryStatus(inquiryStatus: InquiryStatus): List<Inquiry> {
         val inquiryList = inquiryRepository.findAllByInquiryStatusOrderByCreatedDateDesc(inquiryStatus)
         return inquiryList.map { inquiryMapper.toDomain(it)!! }
     }
 
-    override fun findAllByUserAndInquiryStatus(user: User, inquiryStatus: InquiryStatus): List<Inquiry> {
-        val inquiryList = inquiryRepository.findByUserAndInquiryStatusOrderByCreatedDateDesc(userMapper toEntity user, inquiryStatus)
+    override fun findAllByUserAndInquiryStatus(user: User, inquiryStatus: InquiryStatus?): List<Inquiry> {
+        val inquiryList = inquiryRepository.filter(userMapper toEntity user, inquiryStatus)
         return inquiryList.map { inquiryMapper.toDomain(it)!! }
     }
 }
