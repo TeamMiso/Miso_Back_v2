@@ -19,7 +19,7 @@ class ListInquiryService(
         return ListInquiryDto(
             inquiryList =
             when (user.role) {
-                Role.ROLE_USER -> queryInquiryPort.findAllByUser(user)
+                Role.ROLE_USER -> queryInquiryPort.findAllByUserAndInquiryStatus(user, null)
                 else -> queryInquiryPort.findAll()
             }
                 .map { InquiryDto(it) }

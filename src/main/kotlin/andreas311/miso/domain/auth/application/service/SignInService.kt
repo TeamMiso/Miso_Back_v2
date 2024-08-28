@@ -5,6 +5,7 @@ import andreas311.miso.domain.auth.application.event.SaveRefreshTokenEvent
 import andreas311.miso.domain.auth.application.exception.EmailNotValidException
 import andreas311.miso.domain.auth.application.port.input.SignInUseCase
 import andreas311.miso.domain.auth.application.port.input.dto.SignInDto
+import andreas311.miso.domain.auth.application.port.output.PasswordEncodePort
 import andreas311.miso.domain.auth.application.port.output.TokenGeneratePort
 import andreas311.miso.domain.auth.application.port.output.dto.TokenDto
 import andreas311.miso.domain.email.application.port.output.QueryEmailPort
@@ -18,6 +19,7 @@ class SignInService(
     private val queryUserPort: QueryUserPort,
     private val queryEmailPort: QueryEmailPort,
     private val tokenGeneratePort: TokenGeneratePort,
+    private val passwordEncodePort: PasswordEncodePort,
     private val applicationEventPublisher: ApplicationEventPublisher
 ) : SignInUseCase {
     override fun execute(signInDto: SignInDto): TokenDto {
@@ -29,6 +31,8 @@ class SignInService(
         if (!email!!.authentication) {
             throw EmailNotValidException()
         }
+
+        passwordEncodePort.isPasswordMatch(signInDto.password, user.password)
 
         val token = tokenGeneratePort.generateToken(signInDto.email, user.role)
 

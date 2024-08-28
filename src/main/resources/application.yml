@@ -71,3 +71,12 @@ ai:
 
 fcm:
   url: ${FCM_URL}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+chatgpt:
+  api-key: ${CHAT_GPT_KEY}

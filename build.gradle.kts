@@ -78,6 +78,15 @@ dependencies {
 
 	// thymeleaf
 	implementation(Dependencies.THYMELEAF)
+
+	// actuator
+	implementation(Dependencies.ACTUATOR)
+
+	// prometheus
+	runtimeOnly(Dependencies.PROMETHEUS)
+
+	// chat_gpt
+	implementation(Dependencies.CHAT_GPT)
 }
 
 tasks.withType<KotlinCompile> {

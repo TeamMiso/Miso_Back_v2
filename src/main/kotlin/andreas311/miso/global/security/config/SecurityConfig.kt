@@ -82,6 +82,10 @@ class SecurityConfig(
             .antMatchers(HttpMethod.PATCH, "/environment/{id}").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.DELETE, "/environment/{id}").hasAuthority("ROLE_ADMIN")
 
+            .antMatchers("/actuator/prometheus").permitAll()
+
+            .antMatchers(HttpMethod.POST, "/chat/question").authenticated()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()
