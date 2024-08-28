@@ -1,6 +1,7 @@
 package andreas311.miso.domain.auth.application.service
 
 import andreas311.miso.common.annotation.RollbackService
+import andreas311.miso.domain.auth.application.exception.MismatchPasswordException
 import andreas311.miso.domain.auth.application.exception.UserAlreadyExistException
 import andreas311.miso.domain.auth.application.port.input.SignUpUseCase
 import andreas311.miso.domain.auth.application.port.input.dto.SignUpDto
@@ -24,7 +25,9 @@ class SignUpService(
     private val passwordEncodePort: PasswordEncodePort
 ) : SignUpUseCase {
     override fun execute(signUpDto: SignUpDto) {
-        passwordEncodePort.isPasswordMatch(signUpDto.password, signUpDto.passwordCheck)
+        if (signUpDto.password != signUpDto.passwordCheck) {
+            throw MismatchPasswordException()
+        }
 
         if (!queryUserPort.existsByEmail(signUpDto.email)) {
             emailSendPort.sendEmailAuthKey(signUpDto.email)
