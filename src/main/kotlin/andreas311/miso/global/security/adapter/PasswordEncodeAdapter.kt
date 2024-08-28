@@ -12,8 +12,8 @@ class PasswordEncodeAdapter(
     override fun passwordEncode(password: String): String =
         passwordEncoder.encode(password)
 
-    override fun isPasswordMatch(password: String, passwordCheck: String) {
-        if (password != passwordCheck) {
+    override fun isPasswordMatch(passwordCheck: String, password: String) {
+        if (!passwordEncoder.matches(passwordCheck, password)) {
             throw MismatchPasswordException()
         }
     }
