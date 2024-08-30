@@ -13,9 +13,12 @@ import andreas311.miso.domain.user.application.port.output.CommandUserPort
 import andreas311.miso.domain.user.application.port.output.QueryUserPort
 import andreas311.miso.domain.user.domain.Role
 import andreas311.miso.domain.user.domain.User
+import org.springframework.transaction.annotation.Isolation
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @RollbackService
+@Transactional(isolation = Isolation.SERIALIZABLE)
 class SignUpService(
     private val queryUserPort: QueryUserPort,
     private val emailSendPort: EmailSendPort,
